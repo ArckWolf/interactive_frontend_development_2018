@@ -2,7 +2,7 @@
   "name": "hw1",
   "version": "1.0.0",
   "description": "HW1",
-  "repository": "",
+  "repository": "https://github.com/ArckWolf/interactive_frontend_development_2018",
   "author": "Kevin Ree",
   "license": "MIT",
   "private": true,
@@ -28,7 +28,7 @@
     "start": "webpack-dev-server --open --config webpack.config.js",
     "lint": "eslint src/",
     "prestart": "eslint --ignore-pattern LintFail.js src/",
-    "test": "mocha",
+    "test": "mocha && eslint test/",
     "test:watch": "mocha --watch"
   }
 }

@@ -18,7 +18,7 @@ npm manifest:
     "name": "hw1",
     "version": "1.0.0",
     "description": "HW1",
-    "repository": "",
+    "repository": "https://github.com/ArckWolf/interactive_frontend_development_2018",
     "author": "Kevin Ree",
     "license": "MIT",
     "private": true,
@@ -44,7 +44,7 @@ npm manifest:
       "start": "webpack-dev-server --open --config webpack.config.js",
       "lint": "eslint src/",
       "prestart": "eslint --ignore-pattern LintFail.js src/",
-      "test": "mocha",
+      "test": "mocha && eslint test/",
       "test:watch": "mocha --watch"
     }
   }
@@ -5571,7 +5571,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
-  Arguments: /d /s /c mocha
+  Arguments: /d /s /c mocha && eslint test/
   Directory: C:\Users\Kevin Ree\Desktop\Ülikool\interactive_frontend_development_2018
   Output:
   
