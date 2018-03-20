@@ -1,7 +1,7 @@
 import Counter from '../src/Counter';
 
 describe('Counter test', () => {
-    let count;
+    let counter;
     
     beforeEach(() => {
         console.log('Running beforeEach');

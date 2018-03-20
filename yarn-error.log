@@ -5572,7 +5572,7 @@ Trace:
   Exit code: 1
   Command: C:\WINDOWS\system32\cmd.exe
   Arguments: /d /s /c mocha
-  Directory: C:\Users\Kevin Ree\Desktop\HW1.1
+  Directory: C:\Users\Kevin Ree\Desktop\Ülikool\interactive_frontend_development_2018
   Output:
   
       at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
