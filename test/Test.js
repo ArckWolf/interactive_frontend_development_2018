@@ -5,19 +5,19 @@ describe('Counter test', () => {
     
     beforeEach(() => {
         console.log('Running beforeEach');
-        count = new Counter();
+        counter = new Counter();
     });
 
     it('Increase test', () => {
-        count.increase();
-      expect(count.getCount()).to.eql(1);
+        counter.increase();
+      expect(counter.count).to.eql(1);
     });
   
     it('GetCount test', () => {
         for (let click = 1; click <= 10; click++) {
-            count.increase();
-            console.log(click  + " . "+ count.getCount());
-            expect(count.getCount()).to.eql(click);
+            counter.increase();
+            console.log(click  + " . "+ counter.getCount());
+            expect(counter.getCount()).to.eql(click);
         }
     });
   });
