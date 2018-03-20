@@ -1,5 +1,6 @@
 /* eslint-env node, mocha */
 import Counter from '../src/Counter';
+import {expect} from 'chai';
 
 describe('Counter test', () => {
     let counter;
