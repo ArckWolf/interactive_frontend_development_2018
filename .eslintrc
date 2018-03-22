@@ -4,6 +4,9 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "expect": false
+  },
   "plugins": ["import"],
   "extends": [
     "eslint:recommended",

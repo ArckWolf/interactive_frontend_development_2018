@@ -1,12 +1,11 @@
 /* eslint-env node, mocha */
 import Counter from '../src/Counter';
-import {expect} from 'chai';
 
 describe('Counter test', () => {
     let counter;
 
     beforeEach(() => {
-        // console.log('Running beforeEach');
+        console.log('Running beforeEach'); // eslint-disable-line
         counter = new Counter();
     });
 
