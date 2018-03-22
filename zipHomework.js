@@ -2,7 +2,7 @@ const Archiver = require('archiver'); // `yarn add --dev archiver` or `npm insta
 const fs = require('fs');
 
 const IGNORE_DIR_PATTERNS = [/node_modules/, /public/, /.git/, /.hg/];
-const IGNORE_FILE_PATTERNS = [/zipHomework.js/, /homework.zip/, /.gitignore/, /yarn-error.log/];
+const IGNORE_FILE_PATTERNS = [/zipHomework.js/, /homework.zip/, /.gitignore/, /yarn-error.log/, /README.md/];
 const TARGET_FILE_NAME = 'homework.zip';
 
 const matchesAnyPattern = (patterns, testString) => {
