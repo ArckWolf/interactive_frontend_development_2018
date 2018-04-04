@@ -20,14 +20,15 @@ class Input extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='subContainer'>
         <input
+          id="gameInput"
           className='item'
           type="text"
           maxLength="1"
           onChange={this.handleAuthorChange.bind(this)}
         />
-        <button className='item' onClick={this.onSubmit.bind(this)}>
+        <button id="gameInput2"  className='item' onClick={this.onSubmit.bind(this)}>
           Enter
         </button>
       </div>

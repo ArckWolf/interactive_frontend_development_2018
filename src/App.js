@@ -12,19 +12,26 @@ class App extends Component {
   }
 
   handleInputSubmit({userInput}) {
-    this.game.play(userInput);
     this.setState({
         userInput: userInput
       });
-    console.log(this.game.state.history);
-    let h = this.game.state.history[this.game.state.history.length-1];
-    console.log( 'You guessed '+ h.moveUser + ' which ' + h.result + ' against ' + h.moveAI);
+
+    this.game.play(userInput);
+
+    if(this.game.state.history[this.game.state.history.length - 1].result=="won"){
+      document.getElementById('gameInput').style.display = 'none';
+      document.getElementById('gameInput2').style.display = 'none';
+      document.getElementById('youWon').style.display = 'block';
+    }
   }
 
   render() {
     return (
       <div className='container'>
-        <h1 className='item'>Input</h1>
+        <h1 className='item'>Game Lobby</h1>
+        <h2 className='item'>Rock Paper Scissor</h2>
+        <h4 className='item'>Guess either Rock(R),Paper(P) or Scissors(S)</h4>
+        <h1 id="youWon" className='item' >You Won!</h1>
         <Input onSubmit={this.handleInputSubmit.bind(this)} />
         <RoundHistory history={this.game.state.history}/>
       </div>

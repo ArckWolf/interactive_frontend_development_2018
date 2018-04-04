@@ -1,3 +1,7 @@
 .item{
     align-self: center;
 }
+
+#youWon{
+    display: none;
+}

@@ -4,3 +4,9 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.subContainer{
+    display: flex;  
+    justify-content: center;
+    flex-direction: column;
+}
