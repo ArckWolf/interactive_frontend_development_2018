@@ -22,6 +22,7 @@ class App extends Component {
       document.getElementById('gameInput').style.display = 'none';
       document.getElementById('youWon').style.display = 'block';
     }
+    document.getElementById('previousMoves').style.display = 'block';
   }
 
   render() {
@@ -30,7 +31,7 @@ class App extends Component {
         <h1 className='item'>Game Lobby</h1>
         <h2 className='item'>Rock Paper Scissor</h2>
         <h4 className='item'>Guess either Rock(R),Paper(P) or Scissors(S)</h4>
-        <h1 id="youWon" className='item' >You Won!</h1>
+        <h1 className="item" id="youWon" className='item' >You Won!</h1>
         <Input onSubmit={this.handleInputSubmit.bind(this)} />
         <RoundHistory history={this.game.state.history}/>
       </div>

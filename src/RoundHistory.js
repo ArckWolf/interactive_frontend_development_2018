@@ -14,8 +14,8 @@ const RoundHistory = (props) => {
         );
     });
     return (
-        <div className="item" id="results">
-            <h2>Previous moves:</h2>
+        <div className="subContainer item" id="results">
+            <h2 className="item" id="previousMoves" >Previous moves:</h2>
             {commentElements.reverse()}
         </div>
     );

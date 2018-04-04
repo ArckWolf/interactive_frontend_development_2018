@@ -1,7 +1,11 @@
-.item{
+.item, .result{
     align-self: center;
 }
 
 #youWon{
+    display: none;
+}
+
+#previousMoves{
     display: none;
 }
