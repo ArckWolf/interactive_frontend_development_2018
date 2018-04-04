@@ -14,6 +14,12 @@ class Input extends Component {
     this.setState({userInput: event.target.value.toUpperCase()});
   }
 
+  handleOnKeyUp(event) {
+    if (event.keyCode == '13'){
+      this.props.onSubmit({userInput: this.state.userInput});
+    }
+  }
+
   onSubmit() {
     this.props.onSubmit({userInput: this.state.userInput});
   }
@@ -26,11 +32,9 @@ class Input extends Component {
           className='item'
           type="text"
           maxLength="1"
+          onKeyUp={this.handleOnKeyUp.bind(this)}
           onChange={this.handleAuthorChange.bind(this)}
         />
-        <button id="gameInput2"  className='item' onClick={this.onSubmit.bind(this)}>
-          Enter
-        </button>
       </div>
     );
   }

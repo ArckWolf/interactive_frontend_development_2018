@@ -20,7 +20,6 @@ class App extends Component {
 
     if(this.game.state.history[this.game.state.history.length - 1].result=="won"){
       document.getElementById('gameInput').style.display = 'none';
-      document.getElementById('gameInput2').style.display = 'none';
       document.getElementById('youWon').style.display = 'block';
     }
   }
