@@ -1,14 +1,13 @@
 class Game {
   constructor() {
-    this.state = {movesUser: [], movesAi: [], results: []};
+    this.state = {history: []};
   }
   getState() {
-    return this.state;
+    return this.state.history;
   }
   generateMove() {
     const aviableMoves=['R', 'P', 'S'];
     let aiMove=aviableMoves[Math.floor(Math.random()*aviableMoves.length)];
-    this.state.movesAi.push(this.refactorResult(aiMove));
     return aiMove;
   }
   refactorResult(result) {
@@ -22,7 +21,6 @@ class Game {
     }
   }
   play(moveUser) {
-    this.state.movesUser.push(this.refactorResult(moveUser));
     let moveAI=this.generateMove();
     let result = '';
       switch (moveUser) {
@@ -53,8 +51,19 @@ class Game {
               result = 'lost';
             }
             break;
+        default:
+            return null;
       }
-    this.state.results.push(result);
+
+    moveAI=this.refactorResult(moveAI);
+    moveUser=this.refactorResult(moveUser);
+
+    if (this.state.history.length>0) {
+      const lastHistory = this.state.history[this.state.history.length - 1];
+      this.state.history=this.state.history.concat({moveAI, moveUser, result, id: lastHistory.id + 1});
+    } else {
+      this.state.history=this.state.history.concat({moveAI, moveUser, result, id: 0});
+    }
   }
 }
 

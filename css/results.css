@@ -1,0 +1,16 @@
+.won{
+    color: green;
+}
+
+.lost{
+    color: red;
+}
+
+.tied{
+    color: orange;
+}
+
+#results{
+    overflow-y: hidden;
+    height: 500px;
+}
