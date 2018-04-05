@@ -6,15 +6,15 @@ const RoundHistory = (props) => {
     const historyElements = props.history.map((move) => {
         return (
             <Move key={move.id}>
-                <h2 className = {move.result}>
+                <h3 className = {move.result}>
                     {'You guessed '+ move.moveUser + ' which ' + move.result + ' against ' + move.moveAI}
-                </h2>
+                </h3>
             </Move>
         );
     });
     return (
         <div className="subContainer item">
-            <h2 className="item" id="previousMoves" >Previous moves:</h2>
+            <h4 className="item" id="previousMoves" >Previous moves:</h4>
             <div className="subContainerReverse item">
                 {historyElements}
             </div>

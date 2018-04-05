@@ -4,18 +4,11 @@ import PropTypes from 'prop-types';
 class Input extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userInput: ''
-    };
-  }
-
-  handleChange(event) {
-    this.setState({userInput: event.target.value.toUpperCase()});
   }
 
   handleOnKeyUp(event) {
-    if (event.keyCode == '13' && ['R', 'P', 'S'].includes(this.state.userInput)) {
-      this.props.onSubmit({userInput: this.state.userInput});
+    if (event.keyCode == '13' && ['R', 'P', 'S'].includes(event.target.value.toUpperCase())) {
+      this.props.onSubmit({userInput: event.target.value.toUpperCase()});
     }
   }
 
@@ -28,7 +21,6 @@ class Input extends Component {
           type="text"
           maxLength="1"
           onKeyUp={this.handleOnKeyUp.bind(this)}
-          onChange={this.handleChange.bind(this)}
         />
       </div>
     );
