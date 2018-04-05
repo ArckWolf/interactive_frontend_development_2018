@@ -50,8 +50,6 @@ class Game {
               result = 'lost';
             }
             break;
-        default:
-            return null;
       }
 
     moveAI=this.refactorResult(moveAI);

@@ -1,3 +1,4 @@
+/* node zipHomework.js*/
 const Archiver = require('archiver'); // `yarn add --dev archiver` or `npm install --save-dev archiver`
 const fs = require('fs');
 
