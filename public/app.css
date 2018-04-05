@@ -1,0 +1,63 @@
+body {
+  margin: 0px;
+  height: 100vh;
+}
+h1 {
+  font-style: italic;
+}
+button {
+  height: auto;
+  width: 500px;
+  font-size: 60px;
+  background: #44444c;
+  border: none;
+}
+
+input{
+  text-transform: uppercase;
+  text-align: center;
+  height: 40px;
+  width: 560px;
+  font-size: 30px;
+}.container{
+    height: 100vh;
+    display: flex;  
+    justify-content: center;
+    flex-direction: column;
+}
+
+.subContainer{
+    display: flex;  
+    justify-content: center;
+    flex-direction: column;
+}
+
+.subContainerReverse{
+    display: flex;  
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    overflow-y: hidden;
+    height: 335px;
+}.item, .result{
+    align-self: center;
+}
+
+#youWon{
+    display: none;
+}
+
+#previousMoves{
+    display: none;
+}.won{
+    color: green;
+}
+
+.lost{
+    color: red;
+}
+
+.tied{
+    color: orange;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

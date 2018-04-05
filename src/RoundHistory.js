@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Move from './Move';
@@ -22,5 +21,14 @@ const RoundHistory = (props) => {
         </div>
     );
 };
+
+RoundHistory.propTypes = {
+    history: PropTypes.arrayOf(PropTypes.shape({
+      moveUser: PropTypes.string,
+      moveAI: PropTypes.string,
+      result: PropTypes.string,
+      id: PropTypes.number
+    })).isRequired
+  };
 
 export default RoundHistory;

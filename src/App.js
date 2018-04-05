@@ -1,8 +1,7 @@
-/* eslint-disable */
 import React, {Component} from 'react';
 import Input from './Input';
 import Game from './Game';
-import RoundHistory from './RoundHistory'
+import RoundHistory from './RoundHistory';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class App extends Component {
 
     this.game.play(userInput);
 
-    if(this.game.state.history[this.game.getHistory().length - 1].result=="won"){
+    if (this.game.state.history[this.game.getHistory().length - 1].result=='won') {
       document.getElementById('gameInput').style.display = 'none';
       document.getElementById('youWon').style.display = 'block';
     }
@@ -31,7 +30,7 @@ class App extends Component {
         <h1 className='item'>Game Lobby</h1>
         <h2 className='item'>Rock Paper Scissor</h2>
         <h4 className='item'>Guess either Rock(R),Paper(P) or Scissors(S)</h4>
-        <h1 className="item" id="youWon" className='item' >You Won!</h1>
+        <h1 className="item" id="youWon">You Won!</h1>
         <Input onSubmit={this.handleInputSubmit.bind(this)} />
         <RoundHistory history={this.game.getHistory()}/>
       </div>
