@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Move from './Move';
 
 const RoundHistory = (props) => {
-    const commentElements = props.history.map((move) => {
+    const historyElements = props.history.map((move) => {
         return (
             <Move key={move.id}>
                 <h2 className = {move.result}>
@@ -14,9 +14,11 @@ const RoundHistory = (props) => {
         );
     });
     return (
-        <div className="subContainer item" id="results">
+        <div className="subContainer item">
             <h2 className="item" id="previousMoves" >Previous moves:</h2>
-            {commentElements.reverse()}
+            <div className="subContainerReverse item">
+                {historyElements}
+            </div>
         </div>
     );
 };

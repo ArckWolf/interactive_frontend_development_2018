@@ -10,3 +10,11 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.subContainerReverse{
+    display: flex;  
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    overflow-y: hidden;
+    height: 335px;
+}

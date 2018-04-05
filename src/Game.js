@@ -2,13 +2,12 @@ class Game {
   constructor() {
     this.state = {history: []};
   }
-  getState() {
+  getHistory() {
     return this.state.history;
   }
   generateMove() {
     const aviableMoves=['R', 'P', 'S'];
-    let aiMove=aviableMoves[Math.floor(Math.random()*aviableMoves.length)];
-    return aiMove;
+    return aviableMoves[Math.floor(Math.random()*aviableMoves.length)];
   }
   refactorResult(result) {
     switch (result) {

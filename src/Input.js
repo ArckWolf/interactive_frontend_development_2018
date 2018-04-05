@@ -39,6 +39,7 @@ class Input extends Component {
     );
   }
 }
+
 Input.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };

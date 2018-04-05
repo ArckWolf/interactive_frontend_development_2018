@@ -9,8 +9,3 @@
 .tied{
     color: orange;
 }
-
-#results{
-    overflow-y: hidden;
-    height: 300px;
-}

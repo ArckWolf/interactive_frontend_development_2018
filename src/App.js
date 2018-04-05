@@ -18,7 +18,7 @@ class App extends Component {
 
     this.game.play(userInput);
 
-    if(this.game.state.history[this.game.state.history.length - 1].result=="won"){
+    if(this.game.state.history[this.game.getHistory().length - 1].result=="won"){
       document.getElementById('gameInput').style.display = 'none';
       document.getElementById('youWon').style.display = 'block';
     }
@@ -33,7 +33,7 @@ class App extends Component {
         <h4 className='item'>Guess either Rock(R),Paper(P) or Scissors(S)</h4>
         <h1 className="item" id="youWon" className='item' >You Won!</h1>
         <Input onSubmit={this.handleInputSubmit.bind(this)} />
-        <RoundHistory history={this.game.state.history}/>
+        <RoundHistory history={this.game.getHistory()}/>
       </div>
     );
   }
