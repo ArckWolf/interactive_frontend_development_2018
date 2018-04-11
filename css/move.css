@@ -1,0 +1,17 @@
+.move-history .move-list {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  
+  .move.win {
+    color: green;
+  }
+  
+  .move.loss {
+    color: red;
+  }
+  
+  .move.tie {
+    color: orange;
+  }
+  

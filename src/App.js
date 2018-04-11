@@ -1,40 +1,19 @@
-import React, {Component} from 'react';
-import Input from './Input';
-import Game from './Game';
-import RoundHistory from './RoundHistory';
+import React from 'react';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {userInput: ''};
-    this.game = new Game();
-  }
+import RPSGameComponent from './components/RPS/Game';
+import RPS from './games/RPS';
 
-  handleInputSubmit({userInput}) {
-    this.setState({
-        userInput: userInput
-      });
+const game = new RPS();
 
-    this.game.play(userInput);
-
-    if (this.game.state.history[this.game.getHistory().length - 1].result=='won') {
-      document.getElementById('gameInput').style.display = 'none';
-      document.getElementById('forUser').innerHTML='You won!';
-    }
-    document.getElementById('previousMoves').style.display = 'block';
-  }
-
-  render() {
-    return (
-      <div className='container'>
-        <h1 className='item'>Game Lobby</h1>
-        <h2 className='item'>Rock Paper Scissor</h2>
-        <h4 className='item' id="forUser">Guess either Rock(R), Paper(P) or Scissors(S)</h4>
-        <Input onSubmit={this.handleInputSubmit.bind(this)} />
-        <RoundHistory history={this.game.getHistory()}/>
+const App = () => {
+  return (
+    <div className="app">
+      <div className="app-header">
+        <h1>Game Lobby</h1>
       </div>
-    );
-  }
-}
+      <RPSGameComponent game={game}/>
+    </div>
+  );
+};
 
 export default App;

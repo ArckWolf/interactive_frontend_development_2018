@@ -1,0 +1,15 @@
+.game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .game p {
+    font-size: 2em;
+  }
+  
+  .game input {
+    font-size: 4em;
+    text-align: center;
+  }
