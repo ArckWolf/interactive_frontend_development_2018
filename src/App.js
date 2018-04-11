@@ -1,6 +1,7 @@
 import React from 'react';
 
 import RPSGameComponent from './components/RPS/Game';
+import HangmanGameComponent from './components/Hangman/Game';
 import RPS from './games/RPS';
 
 const game = new RPS();
@@ -12,6 +13,7 @@ const App = () => {
         <h1>Game Lobby</h1>
       </div>
       <RPSGameComponent game={game}/>
+      <HangmanGameComponent game={game}/>
     </div>
   );
 };

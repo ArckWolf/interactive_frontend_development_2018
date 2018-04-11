@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class InputChangesOnSubmit extends Component {
+class InputChangesOnChange extends Component {
   constructor(props) {
     super(props);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -36,10 +36,10 @@ class InputChangesOnSubmit extends Component {
   }
 }
 
-InputChangesOnSubmit.propTypes = {
+InputChangesOnChange.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   maxLength: PropTypes.number.isRequired
 };
 
-export default InputChangesOnSubmit;
+export default InputChangesOnChange;
