@@ -11,21 +11,20 @@ class InputChangesOnChange extends Component {
 
   onChange(event) {
     this.setState({
-      value: event.target.value.toUpperCase()
+      value: event.target.value.toLowerCase()
     });
   }
 
   onKeyUp(event) {
-    if (event.keyCode === 13) {
-      const submissionValue = this.state.value;
-      this.setState({value: ''});
-      this.props.onSubmit(submissionValue);
-    }
+    const submissionValue = this.state.value;
+    this.setState({value: ''});
+    this.props.onSubmit(submissionValue);
   }
 
   render() {
     return (
       <input
+        id = "smallInput"
         type={this.props.type}
         maxLength={this.props.maxLength}
         onKeyUp={this.onKeyUp}

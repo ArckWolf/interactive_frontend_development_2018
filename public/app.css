@@ -1,63 +1,59 @@
-body {
-  margin: 0px;
-  height: 100vh;
-}
-h1 {
-  font-style: italic;
-}
-button {
-  height: auto;
-  width: 500px;
-  font-size: 60px;
-  background: #44444c;
-  border: none;
-}
-
-input{
-  text-transform: uppercase;
-  text-align: center;
-  height: 40px;
-  width: 560px;
-  font-size: 30px;
-}.container{
-    height: 100vh;
-    display: flex;  
-    justify-content: center;
+.app {
+    display: flex;
     flex-direction: column;
-}
-
-.subContainer{
-    display: flex;  
     justify-content: center;
+    align-items: center;
+  }
+  .game {
+    display: flex;
     flex-direction: column;
-}
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .game p {
+    font-size: 2em;
+  }
+  
+  .game input {
+    font-size: 4em;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
-.subContainerReverse{
-    display: flex;  
+  .game #smallInput{
+    font-size: 2em;
+    width: 40px;
+    text-align: center;
+    text-transform: uppercase;
+  }h1 {
+    font-size: 4em;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 3em;
+    text-align: center;
+  }
+  
+  h3 {
+    font-size: 2.5em;
+    text-align: center;
+  }.move-history .move-list {
+    display: flex;
     flex-direction: column-reverse;
-    justify-content: flex-end;
-    overflow-y: hidden;
-    height: 335px;
-}.item, .result{
-    align-self: center;
-}
-
-#youWon{
-    display: none;
-}
-
-#previousMoves{
-    display: none;
-}.won{
+  }
+  
+  .move.win {
     color: green;
-}
-
-.lost{
+  }
+  
+  .move.loss {
     color: red;
-}
-
-.tied{
+  }
+  
+  .move.tie {
     color: orange;
-}
-
+  }
+  
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

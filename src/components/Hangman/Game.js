@@ -1,53 +1,55 @@
 import React, {Component} from 'react';
-import InputChangesOnSubmit from '../InputChangesOnSubmit';
+import InputChangesOnChange from '../InputChangesOnChange';
 import PropTypes from 'prop-types';
-
-const GUESS_CHAR_TO_GUESS = {
-  'R': 'ROCK',
-  'P': 'PAPER',
-  'S': 'SCISSORS'
-};
+import HangingMan from './HangingMan';
+import Word from './Word';
 
 class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      moves: [],
+      wordView: this.props.game.getWordView(),
     };
     this.onGuess = this.onGuess.bind(this);
   }
 
   onGuess(guessChar) {
-    const guess = GUESS_CHAR_TO_GUESS[guessChar];
-    if (guess) {
-      const result = this.props.game.guess(guess);
-      this.setState({
-        moves: this.state.moves.concat(result)
-      });
-    } else {
-      return;
-    }
+    const result = this.props.game.guess(guessChar);
+    this.setState({
+      wordView: result.wordView,
+    });
   }
 
   render() {
     let PlayArea;
     const game = this.props.game;
 
-    if (game.getStatus() === 'finished') {
+    if (game.getStatus() === 'finished_won') {
       PlayArea = (
-        <p> You won! </p>
+        <div>
+          <Word wordView={this.state.wordView} />
+          <HangingMan imageId={this.props.game.getImageId()} />
+        </div>
+        );
+    } else if (game.getStatus() === 'finished_lost') {
+      PlayArea = (
+        <div>
+          <HangingMan imageId={this.props.game.getImageId()} />
+        </div>
       );
     } else {
       PlayArea = (
         <div>
-          <p> Guess either Rock(R), Paper(P) or Scissors(S) </p>
-          <InputChangesOnSubmit onSubmit={this.onGuess} type='text' maxLength={1} />
+          Guess a letter from the word:
+          <InputChangesOnChange onSubmit={this.onGuess} type='text' maxLength={1} />
+          <Word wordView={this.state.wordView} />
+          <HangingMan imageId={this.props.game.getImageId()} />
         </div>
       );
     }
     return (
       <div className='game'>
-        <h3> Rock Paper Scissors </h3>
+        <h3> Hangman </h3>
         {PlayArea}
       </div>
     );

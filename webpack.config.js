@@ -11,14 +11,14 @@ module.exports = {
     filename: '[name]',
     path: path.resolve(__dirname, 'public')
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.resolve(__dirname, 'public')
   },
   module: {
     rules: [
-      { test: /\.js/, use: 'babel-loader' },
-      { test: /\.css$/, use: ExtractTextPlugin.extract('css-loader') }
+      {test: /\.js/, use: 'babel-loader'},
+      {test: /\.css$/, use: ExtractTextPlugin.extract('css-loader')}
     ]
   },
   plugins: [
@@ -30,6 +30,10 @@ module.exports = {
       from: './src/index.html',
       to: './index.html',
       toType: 'file'
+    }]),
+    new CopyWebpackPlugin([{
+      from: './img',
+      to: './img'
     }])
   ]
 };
