@@ -5,6 +5,7 @@
     text-align: center;
     border-style: dotted;
     margin-bottom: 20px;
+    margin-top: 20px;
     padding: 25px;
     width: 783px;
   }
@@ -25,3 +26,8 @@
     text-align: center;
     text-transform: uppercase;
   }
+
+.game-list{
+  display: flex;   
+  flex-direction: column-reverse; 
+}

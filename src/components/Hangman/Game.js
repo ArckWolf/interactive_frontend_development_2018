@@ -59,7 +59,9 @@ class Game extends Component {
 Game.propTypes = {
   game: PropTypes.shape({
     guess: PropTypes.func.isRequired,
-    getStatus: PropTypes.func.isRequired
+    getStatus: PropTypes.func.isRequired,
+    getImageId: PropTypes.func.isRequired,
+    getWordView: PropTypes.func.isRequired,
   })
 };
 

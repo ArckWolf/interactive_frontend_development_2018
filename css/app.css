@@ -4,4 +4,9 @@
     justify-content: center;
     align-items: center;
   }
-  
+
+.app-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
