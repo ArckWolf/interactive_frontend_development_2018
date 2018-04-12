@@ -12,7 +12,7 @@ const POSSIBLE_WORD_VIEWS_UPDATE = {
     3: '_____r',
     4: '__r___r__',
   };
-describe('Game getHistory() test', () => {
+describe('Hangman', () => {
     let game;
 
     beforeEach(() => {

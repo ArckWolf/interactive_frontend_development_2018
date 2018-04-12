@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import InputChangesOnChange from '../InputChangesOnChange';
+import InputChangesOnChange from '../Inputs/InputChangesOnChange';
 import PropTypes from 'prop-types';
 import HangingMan from './HangingMan';
 import Word from './Word';

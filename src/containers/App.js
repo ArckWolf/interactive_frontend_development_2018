@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
 import GameList from '../components/GameList';
-import InputGame from '../components/InputGame';
+import InputGame from '../components/Inputs/InputGame';
 
 class App extends Component {
   constructor(props) {
@@ -21,12 +20,9 @@ class App extends Component {
       lastGameId: newGameId,
       games: newGames
     });
-
-    console.log(this.state.games); // eslint-disable-line
   }
 
   render() {
-    console.log(this.state.games); // eslint-disable-line
     return (
       <div className="app">
         <div className="app-header">
@@ -41,14 +37,6 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  focusForms: PropTypes.bool.isRequired
-};
-
-App.defaultProps = {
-  focusForms: true
-};
 
 export default App;
 

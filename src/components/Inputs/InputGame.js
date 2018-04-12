@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import RPS from '../games/RPS';
-import Hangman from '../games/Hangman';
+import RPS from '../../games/RPS';
+import Hangman from '../../games/Hangman';
 
-// Example of controlled form
 class InputGame extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      type: '',
+      play: ''
+    };
   }
 
   onSubmit() {

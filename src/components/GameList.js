@@ -5,9 +5,6 @@ import HangmanGameComponent from '../components/Hangman/Game';
 
 const GameList = (props) => {
   const gameElements = props.allGames.map((game) => {
-    console.log(game); // eslint-disable-line
-    console.log(game.type); // eslint-disable-line
-
     if (game.type === 'RPS') {
         return (
             <RPSGameComponent game={game.play} key={game.id}/>
