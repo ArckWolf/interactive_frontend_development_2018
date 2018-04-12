@@ -50,4 +50,34 @@ describe('Hangman', () => {
             expect(game.updateStringForUserView()).to.eql(POSSIBLE_WORD_VIEWS_UPDATE[index]);
         }
     });
+
+    it('guess() finished_won', () => {
+        game.word.wordView=POSSIBLE_WORD_VIEWS[3];
+        game.word.wordId=3;
+
+        for (let index = 0; index < 'oyster'.length; index++) {
+            expect(game.wrongCounter).to.eql(0);
+            game.guess('oyster'.charAt(index));
+            if (index > 4) {
+                expect(game.status).to.eql('finished_won');
+            } else {
+                expect(game.status).to.eql('waiting');
+            }
+        }
+    });
+
+    it('guess() finished_lost', () => {
+        game.word.wordView=POSSIBLE_WORD_VIEWS[3];
+        game.word.wordId=3;
+
+        for (let index = 0; index < 5; index++) {
+            expect(game.wrongCounter).to.eql(index);
+            game.guess('x');
+            if (index > 4) {
+                expect(game.status).to.eql('finished_lost');
+            } else {
+                expect(game.status).to.eql('waiting');
+            }
+        }
+    });
 });

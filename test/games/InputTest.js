@@ -12,7 +12,6 @@ describe('InputGame', () => {
       )).to.exist;
     });
 
-
     it('InputGame has a buttons with text', () => {
         const form = shallow(<InputGame onSubmit={sinon.stub()} text='Create RPS game' />);
         expect(form).to.have.exactly(1).descendants('button');
@@ -25,14 +24,6 @@ describe('InputGame', () => {
     const form = shallow(<InputGame onSubmit={onSubmit} text='Create RPS game' />);
     form.find('button').simulate('click');
     expect(onSubmit).to.have.been.calledWith({type: 'RPS', play: {status: 'waiting_for_move'}});
-  });
-
-  it('click Create Hangman game', () => {
-    const onSubmit = sinon.stub();
-    const form = shallow(<InputGame onSubmit={onSubmit} text='Create Hangman game' />);
-    form.find('button').simulate('click');
-    // expect(onSubmit).to.have.been.calledWith
-    // ({type: 'Hangman', play: { status: "waiting", word: { wordId: 4, wordView: "_________" }, wrongCounter: 0}});
   });
 });
 
