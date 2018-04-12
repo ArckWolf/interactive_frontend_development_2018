@@ -50,12 +50,4 @@ describe('Hangman', () => {
             expect(game.updateStringForUserView()).to.eql(POSSIBLE_WORD_VIEWS_UPDATE[index]);
         }
     });
-
-    it('guess(-------------------)', () => {
-        for (let index = 1; index <= POSSIBLE_WORD_VIEWS.length+1; index++) {
-            game.word.wordView=POSSIBLE_WORD_VIEWS[index];
-            game.word.wordId=index;
-            expect(game.updateStringForUserView()).to.eql(POSSIBLE_WORD_VIEWS_UPDATE[index]);
-        }
-    });
 });

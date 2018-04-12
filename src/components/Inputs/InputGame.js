@@ -7,10 +7,6 @@ import Hangman from '../../games/Hangman';
 class InputGame extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      type: '',
-      play: ''
-    };
   }
 
   onSubmit() {
