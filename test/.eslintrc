@@ -1,16 +1,22 @@
 {
   "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "env": {
-    "browser": true,
     "node": true,
     "mocha": true
   },
   "globals": {
-    "expect": true
+    "expect": true,
+    "sinon": true
   },
-  "plugins": ["import"],
+  "plugins": ["react", "import"],
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "google",
     "plugin:import/errors",
     "plugin:import/warnings"
@@ -19,6 +25,6 @@
     "max-len": ["error", 120],
     "require-jsdoc": "off",
     "comma-dangle": "off",
-    "linebreak-style":"off"
+    "linebreak-style":"off"    
   }
 }

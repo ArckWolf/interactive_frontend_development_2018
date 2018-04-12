@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import {shallow} from 'enzyme';
 
@@ -26,14 +24,15 @@ describe('InputGame', () => {
     const onSubmit = sinon.stub();
     const form = shallow(<InputGame onSubmit={onSubmit} text='Create RPS game' />);
     form.find('button').simulate('click');
-    expect(onSubmit).to.have.been.calledWith({type: 'RPS', play: { status: "waiting_for_move" }});
+    expect(onSubmit).to.have.been.calledWith({type: 'RPS', play: {status: 'waiting_for_move'}});
   });
 
   it('click Create Hangman game', () => {
     const onSubmit = sinon.stub();
     const form = shallow(<InputGame onSubmit={onSubmit} text='Create Hangman game' />);
     form.find('button').simulate('click');
-    //expect(onSubmit).to.have.been.calledWith({type: 'Hangman', play: { status: "waiting", word: { wordId: 4, wordView: "_________" }, wrongCounter: 0}});
+    // expect(onSubmit).to.have.been.calledWith
+    // ({type: 'Hangman', play: { status: "waiting", word: { wordId: 4, wordView: "_________" }, wrongCounter: 0}});
   });
 });
 
@@ -49,7 +48,7 @@ describe('InputChangesOnChange', () => {
   it('write to Hangman game', () => {
     const onSubmit = sinon.stub();
     const form = shallow(<InputChangesOnChange onSubmit={onSubmit} type='text' maxLength={1} />);
-    form.find('input').simulate('change', { target: { value: 'a' } });
+    form.find('input').simulate('change', {target: {value: 'a'}});
     form.find('input').simulate('keyup', {key: 'a'});
     expect(onSubmit).to.have.been.calledWith('a');
   });
@@ -66,7 +65,7 @@ describe('InputChangesOnSubmit', () => {
   it('write to RPS game', () => {
     const onSubmit = sinon.stub();
     const form = shallow(<InputChangesOnSubmit onSubmit={onSubmit} type='text' maxLength={1} />);
-    form.find('input').simulate('change', { target: { value: 'a' } });
+    form.find('input').simulate('change', {target: {value: 'a'}});
     form.find('input').simulate('keyup', {keyCode: 13});
     expect(onSubmit).to.have.been.calledWith('A');
   });
