@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import MoveHistory from './MoveHistory';
-import InputChangesOnSubmit from '../Inputs/InputChangesOnSubmit';
+import MoveHistory from '../../components/RPS/MoveHistory';
+import InputChangesOnSubmit from '../../components/Inputs/InputChangesOnSubmit';
 import PropTypes from 'prop-types';
 
 const GUESS_CHAR_TO_GUESS = {

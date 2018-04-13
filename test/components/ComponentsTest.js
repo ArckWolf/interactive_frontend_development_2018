@@ -6,8 +6,8 @@ import HangingMan from '../../src/components/Hangman/HangingMan';
 
 import GameList from '../../src/components/GameList';
 
-import RPSGameComponent from '../../src/components/RPS/Game';
-import HangmanGameComponent from '../../src/components/Hangman/Game';
+import RPSGameContainer from '../../src/containers/RPS/Game';
+import HangmanGameContainer from '../../src/containers/Hangman/Game';
 
 import RPS from '../../src/games/RPS';
 import Hangman from '../../src/games/Hangman';
@@ -54,9 +54,9 @@ describe('GameList', () => {
 
         const commentList = shallow(<GameList allGames={allGames} />);
 
-        expect(commentList).to.have.exactly(1).descendants(RPSGameComponent);
-        expect(commentList).to.have.exactly(1).descendants(HangmanGameComponent);
-        expect(commentList).to.contain(<RPSGameComponent game={rps}/>);
-        expect(commentList).to.contain(<HangmanGameComponent game={hangman}/>);
+        expect(commentList).to.have.exactly(1).descendants(RPSGameContainer);
+        expect(commentList).to.have.exactly(1).descendants(HangmanGameContainer);
+        expect(commentList).to.contain(<RPSGameContainer game={rps}/>);
+        expect(commentList).to.contain(<HangmanGameContainer game={hangman}/>);
       });
   });

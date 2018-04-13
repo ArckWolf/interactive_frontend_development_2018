@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import InputChangesOnChange from '../Inputs/InputChangesOnChange';
+import InputChangesOnChange from '../../components/Inputs/InputChangesOnChange';
 import PropTypes from 'prop-types';
-import HangingMan from './HangingMan';
-import Word from './Word';
+import HangingMan from '../../components/Hangman/HangingMan';
+import Word from '../../components/Hangman/Word';
 
 class Game extends Component {
   constructor(props) {
