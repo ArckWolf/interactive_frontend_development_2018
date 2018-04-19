@@ -18,19 +18,12 @@ NewGameButtonsContainer.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('mapStateToProps'); // eslint-disable-line no-console
-  console.log(dispatch); // eslint-disable-line no-console
-
   const newLocal = {
     newGameButonSubmitted: (game) => dispatch(newGameButonSubmitted(game))
   };
-  console.log(newLocal); // eslint-disable-line no-console
-
   return newLocal;
 };
 
 const mapStateToProps = () => {};
-
-// const mapStateToProps = undefined; // no dispatched actions
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewGameButtonsContainer);

@@ -11,7 +11,7 @@ class InputChangesOnSubmit extends Component {
 
   onChange(event) {
     this.setState({
-      value: event.target.value.toUpperCase()
+      value: event.target.value
     });
   }
 

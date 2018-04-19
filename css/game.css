@@ -17,14 +17,12 @@
   .game input {
     font-size: 4em;
     text-align: center;
-    text-transform: uppercase;
   }
 
   .game #smallInput{
     font-size: 2em;
     width: 40px;
     text-align: center;
-    text-transform: lowercase;
   }
 
 .game-list{

@@ -11,7 +11,7 @@ class InputChangesOnChange extends Component {
 
   onChange(event) {
     this.setState({
-      value: event.target.value.toLowerCase()
+      value: event.target.value
     });
   }
 
