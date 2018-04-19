@@ -9,7 +9,6 @@ export const newGameButonSubmitted = (game) => {
   console.log('game:'); // eslint-disable-line no-console
   console.log(game); // eslint-disable-line no-console
   newGameStarted(game.play);
-  // An action must be a plain JavaScript object (no instances of classes!)
   return {
     type: NEW_GAME_BUTTON_SUBMITTED,
     payload: {
@@ -20,10 +19,10 @@ export const newGameButonSubmitted = (game) => {
   };
 };
 
-export const NEW_GAME_STARTED = 'NEW_GAME_STARTED';
-export const newGameStarted = (gameType) => {
-  console.log('NEW_GAME_STARTED:'); // eslint-disable-line no-console
+const newGameStarted = (gameType) => {
+  console.log('NEW_GAME_BUTTON_SUBMITTED:'); // eslint-disable-line no-console
   console.log(gameType); // eslint-disable-line no-console
   gameId++;
   games[gameId] = gameType;
+  console.log(games); // eslint-disable-line no-console
 };
