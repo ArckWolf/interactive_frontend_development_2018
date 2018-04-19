@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputGame from '../components/Inputs/InputGame';
-import { connect } from 'react-redux';
-import { newGameButonSubmitted } from '../actions';
+import {connect} from 'react-redux';
+import {newGameButonSubmitted} from '../actions';
 
 const NewGameButtonsContainer = (props) => {
   return (
@@ -29,6 +29,8 @@ const mapDispatchToProps = (dispatch) => {
   return newLocal;
 };
 
-const mapStateToProps=undefined;
+const mapStateToProps = () => {};
+
+// const mapStateToProps = undefined; // no dispatched actions
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewGameButtonsContainer);

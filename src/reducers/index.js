@@ -1,5 +1,5 @@
 import {
-  BUTTON_SUBMITTED,
+  NEW_GAME_BUTTON_SUBMITTED,
 } from '../actions/index.js';
 
 const initialGames = [];
@@ -14,8 +14,8 @@ const initialState = {
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
-    case BUTTON_SUBMITTED: {
-      console.log('BUTTON_SUBMITTED'); // eslint-disable-line no-console
+    case NEW_GAME_BUTTON_SUBMITTED: {
+      console.log('NEW_GAME_BUTTON_SUBMITTED'); // eslint-disable-line no-console
       console.log(state); // eslint-disable-line no-console
       console.log(action); // eslint-disable-line no-console
       const newGame = state.games.concat({
