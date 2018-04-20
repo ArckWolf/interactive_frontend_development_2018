@@ -4,14 +4,18 @@ import RPSGameContainer from '../containers/RPS/Game';
 import HangmanGameContainer from '../containers/Hangman/Game';
 
 const GameList = (props) => {
-  const gameElements = props.allGames.map((game) => {
+    console.log('GameList---------------------'); // eslint-disable-line no-console
+    console.log(props); // eslint-disable-line no-console
+  const gameElements = props.games.map((game) => {
+    console.log(game.id); // eslint-disable-line no-console
+
     if (game.type === 'RPS') {
         return (
-            <RPSGameContainer game={game.play} key={game.id}/>
+            <RPSGameContainer game={game} key={game.id} submit={props.submitRPS}/>
         );
     } else {
         return (
-            <HangmanGameContainer game={game.play} key={game.id}/>
+            <HangmanGameContainer game={game} key={game.id} submit={props.submitHangman}/>
         );
     }
   });
@@ -23,9 +27,8 @@ const GameList = (props) => {
 };
 
 GameList.propTypes = {
-    allGames: PropTypes.arrayOf(PropTypes.shape({
+    games: PropTypes.arrayOf(PropTypes.shape({
         type: PropTypes.string.isRequired,
-        play: PropTypes.object.isRequired,
         id: PropTypes.number.isRequired
     })).isRequired,
 };

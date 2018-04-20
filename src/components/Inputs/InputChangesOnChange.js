@@ -18,7 +18,7 @@ class InputChangesOnChange extends Component {
   onKeyUp(event) {
     const submissionValue = this.state.value;
     this.setState({value: ''});
-    this.props.onSubmit(submissionValue);
+    this.props.onSubmit(this.props.gameID, submissionValue);
   }
 
   render() {
@@ -38,7 +38,8 @@ class InputChangesOnChange extends Component {
 InputChangesOnChange.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  maxLength: PropTypes.number.isRequired
+  maxLength: PropTypes.number.isRequired,
+  gameID: PropTypes.number.isRequired
 };
 
 export default InputChangesOnChange;

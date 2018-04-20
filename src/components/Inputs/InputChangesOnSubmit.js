@@ -19,7 +19,7 @@ class InputChangesOnSubmit extends Component {
     if (event.keyCode === 13) {
       const submissionValue = this.state.value;
       this.setState({value: ''});
-      this.props.onSubmit(submissionValue);
+      this.props.onSubmit(this.props.gameID, submissionValue);
     }
   }
 
@@ -39,7 +39,8 @@ class InputChangesOnSubmit extends Component {
 InputChangesOnSubmit.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  maxLength: PropTypes.number.isRequired
+  maxLength: PropTypes.number.isRequired,
+  gameID: PropTypes.number.isRequired
 };
 
 export default InputChangesOnSubmit;

@@ -27,8 +27,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state); // eslint-disable-line no-console
   return {
-      games: state.games.play
+      games: state.games
   };
 };
 

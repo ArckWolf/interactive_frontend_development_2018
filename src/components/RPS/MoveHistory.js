@@ -3,6 +3,8 @@ import Move from './Move';
 import PropTypes from 'prop-types';
 
 const MoveHistory = ({moves}) => {
+  console.log('----moves----'); // eslint-disable-line no-console
+  console.log(moves); // eslint-disable-line no-console
   const moveHistory = moves.map((move, index) =>
     <Move
       guess={move.guess}
@@ -26,8 +28,8 @@ const MoveHistory = ({moves}) => {
   }
 };
 
-MoveHistory.propTypes = {
+/* MoveHistory.propTypes = {
   moves: PropTypes.array.isRequired
-};
+}; */
 
 export default MoveHistory;
