@@ -2,28 +2,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputGame from '../components/Inputs/InputGame';
 import {connect} from 'react-redux';
-import {newGameButonSubmitted} from '../actions';
+import {rpsGameCreated, hangmanGameCreated} from '../actions';
 
 const NewGameButtonsContainer = (props) => {
   return (
     <div className="app-buttons">
-      <InputGame onSubmit={props.newGameButonSubmitted} text='Create RPS game' />
-      <InputGame onSubmit={props.newGameButonSubmitted} text='Create Hangman game' />
+      <InputGame onSubmit={props.rpsGameCreated} text='Create RPS game' />
+      <InputGame onSubmit={props.hangmanGameCreated} text='Create Hangman game' />
     </div>
   );
 };
 
 NewGameButtonsContainer.propTypes = {
-  newGameButonSubmitted: PropTypes.func.isRequired
+  rpsGameCreated: PropTypes.func.isRequired,
+  hangmanGameCreated: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => {
   const newLocal = {
-    newGameButonSubmitted: (game) => dispatch(newGameButonSubmitted(game))
+    rpsGameCreated: () => dispatch(rpsGameCreated()),
+    hangmanGameCreated: () => dispatch(hangmanGameCreated())
   };
   return newLocal;
 };
 
-const mapStateToProps = () => {};
+const mapStateToProps = (state) => {
+  return {
+      games: state.games.play
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewGameButtonsContainer);

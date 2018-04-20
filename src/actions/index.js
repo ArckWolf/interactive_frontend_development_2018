@@ -11,3 +11,23 @@ export const newGameButonSubmitted = (game) => {
     }
   };
 };
+
+export const RPS_GAME_CREATED = 'RPS_GAME_CREATED';
+export const rpsGameCreated = () => {
+  return {
+    type: RPS_GAME_CREATED,
+    payload: {
+      id: nextId++
+    }
+  };
+};
+
+export const HANGMAN_GAME_CREATED = 'HANGMAN_GAME_CREATED';
+export const hangmanGameCreated = () => {
+  return {
+    type: HANGMAN_GAME_CREATED,
+    payload: {
+      id: nextId++
+    }
+  };
+};
