@@ -1,6 +1,6 @@
 import React from 'react';
 import Move from './Move';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 const MoveHistory = ({moves}) => {
   console.log('----moves----'); // eslint-disable-line no-console
