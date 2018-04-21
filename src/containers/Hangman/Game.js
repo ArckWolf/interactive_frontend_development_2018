@@ -1,41 +1,34 @@
 import React from 'react';
 import InputChangesOnChange from '../../components/Inputs/InputChangesOnChange';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import HangingMan from '../../components/Hangman/HangingMan';
 import Word from '../../components/Hangman/Word';
 
 const Game = (props) => {
-  console.log('Game--HANGMAN-----------------'); // eslint-disable-line no-console
-  console.log(props); // eslint-disable-line no-console
-  console.log(props.submit); // eslint-disable-line no-console
-  console.log(props.game.id); // eslint-disable-line no-console
-  const lost = (
-    <div>
-      <HangingMan imageId={props.game.wrongCounter} />
-    </div>
-  );
-  const won = (
-    <div>
-      <Word wordView={props.game.wordView} />
-      <HangingMan imageId={props.game.wrongCounter} />
-  </div>
-  );
-  const play = (
-    <div>
-      Guess a letter from the word:
-      <InputChangesOnChange gameID={props.game.id} onSubmit={props.submit} type='text' maxLength={1} />
-      <Word wordView={props.game.wordView} />
-      <HangingMan imageId={props.game.wrongCounter} />
-    </div>
-  );
-
   let PlayArea;
+
   if (props.game.status === 'finished_won') {
-    PlayArea = won;
+    PlayArea = (
+      <div>
+        <Word wordView={props.game.wordView} />
+        <HangingMan imageId={props.game.wrongCounter} />
+    </div>
+    );
   } else if (props.game.status === 'finished_lost') {
-    PlayArea = lost;
+    PlayArea = (
+      <div>
+        <HangingMan imageId={props.game.wrongCounter} />
+      </div>
+    );
   } else {
-    PlayArea = play;
+    PlayArea = (
+      <div>
+        Guess a letter from the word:
+        <InputChangesOnChange gameID={props.game.id} onSubmit={props.submit} type='text' maxLength={1} />
+        <Word wordView={props.game.wordView} />
+        <HangingMan imageId={props.game.wrongCounter} />
+      </div>
+    );
   }
 
   return (
@@ -48,29 +41,13 @@ const Game = (props) => {
   );
 };
 
-/* const gameElements = props.games.map((game) => {
-  if (game.type === 'RPS') {
-      return (
-          <RPSGameContainer game={game} key={game.id} submit={game.submitHangman}/>
-      );
-  } else {
-      return (
-          <HangmanGameContainer game={game} key={game.id} submit={game.submitRPS}/>
-      );
-  }
-});
-return (
-  <div className="game-list">
-    {gameElements}
-  </div>
-); */
-/* Game.propTypes = {
+ Game.propTypes = {
   game: PropTypes.shape({
-    guess: PropTypes.func.isRequired,
-    getStatus: PropTypes.func.isRequired,
-    getImageId: PropTypes.func.isRequired,
-    getWordView: PropTypes.func.isRequired,
-  })
+    id: PropTypes.number.isRequired,
+    wordView: PropTypes.string.isRequired,
+    wrongCounter: PropTypes.number.isRequired
+  }),
+  submit: PropTypes.func.isRequired
 };
- */
+
 export default Game;

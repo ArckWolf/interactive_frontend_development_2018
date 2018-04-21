@@ -1,14 +1,9 @@
 import React from 'react';
 import MoveHistory from '../../components/RPS/MoveHistory';
 import InputChangesOnSubmit from '../../components/Inputs/InputChangesOnSubmit';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const Game = (props) => {
-  console.log('Game-RPS------------------'); // eslint-disable-line no-console
-  console.log(props); // eslint-disable-line no-console
-  console.log(props.submit); // eslint-disable-line no-console
-  console.log(props.game.id); // eslint-disable-line no-console
-
   let PlayArea;
 
   if (props.game.status === 'finished') {
@@ -33,11 +28,12 @@ const Game = (props) => {
   );
 };
 
-/* Game.propTypes = {
+Game.propTypes = {
   game: PropTypes.shape({
-    guess: PropTypes.func.isRequired,
-    getStatus: PropTypes.func.isRequired
-  })
+    id: PropTypes.number.isRequired,
+    moves: PropTypes.array.isRequired
+  }),
+  submit: PropTypes.func.isRequired
 };
- */
+
 export default Game;

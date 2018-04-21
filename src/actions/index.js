@@ -45,11 +45,7 @@ export const hangmanGameCreated = () => {
 
 export const HANGMAN_GUESS_SUBMITTED = 'HANGMAN_GUESS_SUBMITTED';
 export const submitHangman = (gameId, letter) => {
-  console.log('HANGMAN_GUESS_SUBMITTED'); // eslint-disable-line no-console
-    console.log(gameId); // eslint-disable-line no-console
-    console.log(letter); // eslint-disable-line no-console
   const game = games[gameId];
-  console.log(games); // eslint-disable-line no-console
 
   game.guess(letter);
 
@@ -68,15 +64,10 @@ export const RPS_GUESS_SUBMITTED = 'RPS_GUESS_SUBMITTED';
 export const submitRPS = (gameId, letter) => {
   const game = games[gameId];
 
-
   if (GUESS_CHAR_TO_GUESS[letter]) {
     game.guess(GUESS_CHAR_TO_GUESS[letter]);
-
-    console.log('RPS_GUESS_SUBMITTED++'); // eslint-disable-line no-console
-    console.log(gameId); // eslint-disable-line no-console
-    console.log(letter); // eslint-disable-line no-console
-    console.log(game); // eslint-disable-line no-console
   }
+
   return {
     type: RPS_GUESS_SUBMITTED,
     payload: {
