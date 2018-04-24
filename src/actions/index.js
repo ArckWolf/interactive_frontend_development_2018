@@ -1,6 +1,79 @@
 import RPS from '../games/RPS';
 import Hangman from '../games/Hangman';
 
+/* const GUESS_CHAR_TO_GUESS = {
+  'R': 'ROCK',
+  'P': 'PAPER',
+  'S': 'SCISSORS'
+};
+
+const games = {};
+let gameId = 0; */
+
+export const POST_NEW_RPS_GAME_REQUEST = 'POST_NEW_RPS_GAME_REQUEST';
+export const postNewRpsGameRequest = () => ({type: 'rps'});
+
+export const POST_NEW_RPS_GAME_SUCCEEDED = 'POST_NEW_RPS_GAME_SUCCEEDED';
+export const postNewRpsGameSucceeded = (responce) => ({
+  type: POST_NEW_RPS_GAME_SUCCEEDED,
+  payload: responce
+});
+
+export const POST_NEW_RPS_GAME_FAILD = 'POST_NEW_RPS_GAME_FAILD';
+export const postNewRpsGameFaild = (reason) => ({
+  type: POST_NEW_RPS_GAME_FAILD,
+  payload: reason
+});
+
+export const POST_RPS_GUESS_REQUEST = 'POST_RPS_GUESS_REQUEST';
+export const postRpsGuessRequest = () => ({});
+
+export const POST_RPS_GUESS_SUCSEEDED = 'POST_RPS_GUESS_SUCSEEDED';
+export const postRpsGuessSuceeded = (responce) => ({
+    type: POST_RPS_GUESS_SUCSEEDED,
+    payload: responce
+});
+
+export const POST_RPS_GUESS_FAILD = 'POST_RPS_GUESS_FAILD';
+export const postRpsGuessFaild = (reason) => ({
+    type: POST_RPS_GUESS_FAILD,
+    payload: reason
+});
+
+
+// ----------------------------------------------------------------------------------
+export const POST_NEW_HANGMAN_GAME_REQUEST = 'POST_NEW_HANGMAN_GAME_REQUEST';
+export const postNewHangmanGameRequest = () => ({type: 'hangman'});
+
+export const POST_NEW_HANGMAN_GAME_SUCCEEDED = 'POST_NEW_HANGMAN_GAME_SUCCEEDED';
+export const postNewHangmanGameSucceeded = (responce) => ({
+  type: POST_NEW_HANGMAN_GAME_SUCCEEDED,
+  payload: responce
+});
+
+export const POST_NEW_HANGMAN_GAME_FAILD = 'POST_NEW_HANGMAN_GAME_FAILD';
+export const postNewHangmanGameFaild = (reason) => ({
+  type: POST_NEW_HANGMAN_GAME_FAILD,
+  payload: reason
+});
+
+export const POST_HANGMAN_GUESS_REQUEST = 'POST_HANGMAN_GUESS_REQUEST';
+export const postHangmanGuessRequest = () => ({});
+
+export const POST_HANGMAN_GUESS_SUCSEEDED = 'POST_HANGMAN_GUESS_SUCSEEDED';
+export const postHangmanGuessSuceeded = (responce) => ({
+    type: POST_HANGMAN_GUESS_SUCSEEDED,
+    payload: responce
+});
+
+export const POST_HANGMAN_GUESS_FAILD = 'POST_HANGMAN_GUESS_FAILD';
+export const postHangmanGuessFaild = (reason) => ({
+    type: POST_HANGMAN_GUESS_FAILD,
+    payload: reason
+});
+
+
+// -------------------------------------------------------------------------------------------------------------------
 const GUESS_CHAR_TO_GUESS = {
   'R': 'ROCK',
   'P': 'PAPER',
