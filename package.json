@@ -33,11 +33,17 @@
     "webpack-dev-server": "^2.11.2"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-mock-store": "^1.5.1",
+    "redux-thunk": "^2.2.0",
+    "uuid": "^3.2.1"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
