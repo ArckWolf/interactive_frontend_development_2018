@@ -7,72 +7,155 @@ import {
   postNewRpsGameSucceeded,
   postNewRpsGameFaild,
 
-  postRpsGuessRequest,
-  postRpsGuessSuceeded,
-  postRpsGuessFaild,
-
   postNewHangmanGameRequest,
   postNewHangmanGameSucceeded,
   postNewHangmanGameFaild,
+
+  postRpsGuessRequest,
+  postRpsGuessSuceeded,
+  postRpsGuessFaild,
 
   postHangmanGuessRequest,
   postHangmanGuessSuceeded,
   postHangmanGuessFaild
 } from './index';
 
+const GUESS_CHAR_TO_GUESS = {
+  'R': 'ROCK',
+  'P': 'PAPER',
+  'S': 'SCISSORS'
+};
+
 const SERVER_ADDRESS = 'http://localhost:8081';
 
-// Define one method which executes the asynchronous process
-export const postNewGame = ({author, text, localId}, fetch = window.fetch) => {
+export const postHangmanGuess = (id, letter, fetch = window.fetch) => {
   return (dispatch) => {
-    const requestAction = postCommentRequested({author, text});
+    const requestAction = postHangmanGuessRequest(id);
     dispatch(requestAction);
-    const localId = requestAction.payload.localId;
+    console.log('requestAction//////////////.....'); // eslint-disable-line
+    console.log(requestAction); // eslint-disable-line
+    const gameServerID = requestAction.payload.gameServerId;
     return fetch(
-      SERVER_ADDRESS + '/comments',
+      SERVER_ADDRESS + '/games/' + gameServerID + '/moves',
       {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
         },
-        body: JSON.stringify({author, text})
+        body: JSON.stringify({guess: letter})
       },
     ).then((response) => {
-      if (response.ok) {
+       if (response.ok) {
         response.json().then(
-          ({id}) => dispatch(postCommentSucceeded({localId, id})),
-          (error) => dispatch(postCommentFailed({localId, error: 'Unparseable response'}))
+          (game) => dispatch(postHangmanGuessSuceeded({id, game})),
+          (error) => dispatch(postHangmanGuessFaild({id, error: 'Unparseable response'}))
         );
       } else {
         response.json().then(
-          ({error}) => dispatch(postCommentFailed({localId, error: error})),
-          (error) => dispatch(postCommentFailed({localId, error: 'Unparseable response'}))
+          ({error}) => dispatch(postHangmanGuessFaild({id, error: error})),
+          (error) => dispatch(postHangmanGuessFaild({id, error: 'Unparseable response'}))
         );
       }
     }).catch((error) => {
-      dispatch(dispatch(postCommentFailed({localId, error: 'Service unreachable'})));
+      dispatch(dispatch(postHangmanGuessFaild({id, error: 'Service unreachable'})));
     });
   };
 };
 
-export const postGuess = (fetch = window.fetch) => {
+export const postRpsGuess = (id, letter, fetch = window.fetch) => {
   return (dispatch) => {
-    dispatch(getCommentsRequested());
-    return fetch(SERVER_ADDRESS + '/comments')
-      .then((response) => {
-        if (response.ok) {
-          response.json().then(
-            (comments) => dispatch(getCommentsSucceeded(comments)),
-            (error) => dispatch(getCommentsFailed('Unparseable response'))
-          );
-        } else {
-          response.json().then(
-            ({error}) => dispatch(getCommentsFailed(error)),
-            (error) => dispatch(getCommentsFailed('Unparseable response'))
-          );
-        }
-      }).catch((error) => {
-        dispatch(dispatch(getCommentsFailed('Service unreachable')));
-      });
+    const requestAction = postRpsGuessRequest(id);
+    dispatch(requestAction);
+    console.log('requestAction//////////////.....'); // eslint-disable-line
+    console.log(requestAction); // eslint-disable-line
+    const gameServerID = requestAction.payload.gameServerId;
+    return fetch(
+      SERVER_ADDRESS + '/games/' + gameServerID + '/moves',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({guess: GUESS_CHAR_TO_GUESS[letter]})
+      },
+    ).then((response) => {
+       if (response.ok) {
+        response.json().then(
+          (game) => dispatch(postRpsGuessSuceeded({id, game})),
+          (error) => dispatch(postRpsGuessFaild({id, error: 'Unparseable response'}))
+        );
+      } else {
+        response.json().then(
+          ({error}) => dispatch(postRpsGuessFaild({id, error: error})),
+          (error) => dispatch(postRpsGuessFaild({id, error: 'Unparseable response'}))
+        );
+      }
+    }).catch((error) => {
+      dispatch(dispatch(postRpsGuessFaild({id, error: 'Service unreachable'})));
+    });
+  };
+};
+
+export const postNewRpswGame = (fetch = window.fetch) => {
+  return (dispatch) => {
+    const requestAction = postNewRpsGameRequest();
+    dispatch(requestAction);
+    const id = requestAction.payload.id;
+    return fetch(
+      SERVER_ADDRESS + '/games/',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({type: 'rps'})
+      },
+    ).then((response) => {
+       if (response.ok) {
+        response.json().then(
+          (game) => dispatch(postNewRpsGameSucceeded({id, game})),
+          (error) => dispatch(postNewRpsGameFaild({id, error: 'Unparseable response'}))
+        );
+      } else {
+        response.json().then(
+          ({error}) => dispatch(postNewRpsGameFaild({id, error: error})),
+          (error) => dispatch(postNewRpsGameFaild({id, error: 'Unparseable response'}))
+        );
+      }
+    }).catch((error) => {
+      dispatch(dispatch(postNewRpsGameFaild({id, error: 'Service unreachable'})));
+    });
+  };
+};
+
+export const postNewHangmanwGame = (fetch = window.fetch) => {
+  return (dispatch) => {
+    const requestAction = postNewHangmanGameRequest();
+    dispatch(requestAction);
+    const id = requestAction.payload.id;
+    return fetch(
+      SERVER_ADDRESS + '/games/',
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({type: 'hangman'})
+      },
+    ).then((response) => {
+       if (response.ok) {
+        response.json().then(
+          (game) => dispatch(postNewHangmanGameSucceeded({id, game})),
+          (error) => dispatch(postNewHangmanGameFaild({id, error: 'Unparseable response'}))
+        );
+      } else {
+        response.json().then(
+          ({error}) => dispatch(postNewHangmanGameFaild({id, error: error})),
+          (error) => dispatch(postNewHangmanGameFaild({id, error: 'Unparseable response'}))
+        );
+      }
+    }).catch((error) => {
+      dispatch(dispatch(postNewHangmanGameFaild({id, error: 'Service unreachable'})));
+    });
   };
 };

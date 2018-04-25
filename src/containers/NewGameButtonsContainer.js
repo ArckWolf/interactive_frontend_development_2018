@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputGame from '../components/Inputs/InputGame';
 import {connect} from 'react-redux';
-import {rpsGameCreated, hangmanGameCreated} from '../actions';
+import {postNewRpswGame, postNewHangmanwGame} from '../actions/GameServerActions';
 
 const NewGameButtonsContainer = (props) => {
   return (
@@ -19,9 +19,11 @@ NewGameButtonsContainer.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => {
+  console.log('dispatch//////////////.....'); // eslint-disable-line
+  console.log(dispatch); // eslint-disable-line
   const newLocal = {
-    rpsGameCreated: () => dispatch(rpsGameCreated()),
-    hangmanGameCreated: () => dispatch(hangmanGameCreated())
+    rpsGameCreated: () => dispatch(postNewRpswGame()),
+    hangmanGameCreated: () => dispatch(postNewHangmanwGame())
   };
   return newLocal;
 };

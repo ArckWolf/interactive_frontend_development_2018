@@ -7,14 +7,14 @@ import Word from '../../components/Hangman/Word';
 const Game = (props) => {
   let PlayArea;
 
-  if (props.game.status === 'finished_won') {
+  if (props.game.status === 'finished' && props.game.won === true) {
     PlayArea = (
       <div>
         <Word wordView={props.game.wordView} />
         <HangingMan imageId={props.game.wrongCounter} />
     </div>
     );
-  } else if (props.game.status === 'finished_lost') {
+  } else if (props.game.status === 'finished' && props.game.won === false) {
     PlayArea = (
       <div>
         <HangingMan imageId={props.game.wrongCounter} />

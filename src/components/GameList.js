@@ -5,7 +5,7 @@ import HangmanGameContainer from '../containers/Hangman/Game';
 
 const GameList = (props) => {
   const gameElements = props.games.map((game) => {
-    if (game.type === 'RPS') {
+    if (game.type === 'rps') {
         return (
             <RPSGameContainer game={game} key={game.id} submit={props.submitRPS}/>
         );

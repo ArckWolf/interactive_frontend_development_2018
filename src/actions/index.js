@@ -1,23 +1,37 @@
 import RPS from '../games/RPS';
 import Hangman from '../games/Hangman';
 
-/* const GUESS_CHAR_TO_GUESS = {
+const GUESS_CHAR_TO_GUESS = {
   'R': 'ROCK',
   'P': 'PAPER',
   'S': 'SCISSORS'
 };
 
 const games = {};
-let gameId = 0; */
+let gameId = 0;
 
 export const POST_NEW_RPS_GAME_REQUEST = 'POST_NEW_RPS_GAME_REQUEST';
-export const postNewRpsGameRequest = () => ({type: 'rps'});
+export const postNewRpsGameRequest = () => {
+  gameId++;
+  return {
+    type: POST_NEW_RPS_GAME_REQUEST,
+    payload: {
+      id: gameId,
+      type: 'rps',
+      moves: [],
+      inFlight: true
+    }
+  };
+};
 
 export const POST_NEW_RPS_GAME_SUCCEEDED = 'POST_NEW_RPS_GAME_SUCCEEDED';
-export const postNewRpsGameSucceeded = (responce) => ({
+export const postNewRpsGameSucceeded = (responce) => {
+  games[responce.id] = responce.game.id;
+  return {
   type: POST_NEW_RPS_GAME_SUCCEEDED,
   payload: responce
-});
+  };
+};
 
 export const POST_NEW_RPS_GAME_FAILD = 'POST_NEW_RPS_GAME_FAILD';
 export const postNewRpsGameFaild = (reason) => ({
@@ -26,7 +40,14 @@ export const postNewRpsGameFaild = (reason) => ({
 });
 
 export const POST_RPS_GUESS_REQUEST = 'POST_RPS_GUESS_REQUEST';
-export const postRpsGuessRequest = () => ({});
+export const postRpsGuessRequest = (id) => ({
+  type: POST_RPS_GUESS_REQUEST,
+  payload: {
+    id: id,
+    gameServerId: games[id],
+    inFlight: true
+  }
+});
 
 export const POST_RPS_GUESS_SUCSEEDED = 'POST_RPS_GUESS_SUCSEEDED';
 export const postRpsGuessSuceeded = (responce) => ({
@@ -43,13 +64,29 @@ export const postRpsGuessFaild = (reason) => ({
 
 // ----------------------------------------------------------------------------------
 export const POST_NEW_HANGMAN_GAME_REQUEST = 'POST_NEW_HANGMAN_GAME_REQUEST';
-export const postNewHangmanGameRequest = () => ({type: 'hangman'});
+export const postNewHangmanGameRequest = () => {
+  gameId++;
+  games[gameId] = gameId;
+  return {
+    type: POST_NEW_HANGMAN_GAME_REQUEST,
+    payload: {
+      id: gameId,
+      type: 'Hangman',
+      wordView: '',
+      wrongCounter: 0,
+      inFlight: true
+    }
+  };
+};
 
 export const POST_NEW_HANGMAN_GAME_SUCCEEDED = 'POST_NEW_HANGMAN_GAME_SUCCEEDED';
-export const postNewHangmanGameSucceeded = (responce) => ({
+export const postNewHangmanGameSucceeded = (responce) => {
+  games[responce.id] = responce.game.id;
+  return {
   type: POST_NEW_HANGMAN_GAME_SUCCEEDED,
   payload: responce
-});
+  };
+};
 
 export const POST_NEW_HANGMAN_GAME_FAILD = 'POST_NEW_HANGMAN_GAME_FAILD';
 export const postNewHangmanGameFaild = (reason) => ({
@@ -58,7 +95,14 @@ export const postNewHangmanGameFaild = (reason) => ({
 });
 
 export const POST_HANGMAN_GUESS_REQUEST = 'POST_HANGMAN_GUESS_REQUEST';
-export const postHangmanGuessRequest = () => ({});
+export const postHangmanGuessRequest = (id) => ({
+  type: POST_HANGMAN_GUESS_REQUEST,
+  payload: {
+    id: id,
+    gameServerId: games[id],
+    inFlight: true
+  }
+});
 
 export const POST_HANGMAN_GUESS_SUCSEEDED = 'POST_HANGMAN_GUESS_SUCSEEDED';
 export const postHangmanGuessSuceeded = (responce) => ({
@@ -74,15 +118,6 @@ export const postHangmanGuessFaild = (reason) => ({
 
 
 // -------------------------------------------------------------------------------------------------------------------
-const GUESS_CHAR_TO_GUESS = {
-  'R': 'ROCK',
-  'P': 'PAPER',
-  'S': 'SCISSORS'
-};
-
-const games = {};
-let gameId = 0;
-
 export const RPS_GAME_CREATED = 'RPS_GAME_CREATED';
 export const rpsGameCreated = () => {
   const game = new RPS();
