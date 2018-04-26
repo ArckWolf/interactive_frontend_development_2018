@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import GameList from '../components/GameList';
-import {postRpsGuess, postHangmanGuess} from '../actions/GameServerActions';
+import {postRpsGuessRequest, postHangmanGuessRequest} from '../actions';
 
 
 const mapStateToProps = (state) => ({
@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   const newLocal = {
-    submitHangman: (gameId, letter) => dispatch(postHangmanGuess(gameId, letter)),
-    submitRPS: (gameId, letter) => dispatch(postRpsGuess(gameId, letter))
+    submitHangman: (gameId, letter) => dispatch(postHangmanGuessRequest(gameId, letter)),
+    submitRPS: (gameId, letter) => dispatch(postRpsGuessRequest(gameId, letter))
   };
   return newLocal;
 };

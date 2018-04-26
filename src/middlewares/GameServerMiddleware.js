@@ -12,12 +12,10 @@ import {
   postNewHangmanGameFaild,
 
   POST_RPS_GUESS_REQUEST,
-  postRpsGuessRequest,
   postRpsGuessSuceeded,
   postRpsGuessFaild,
 
   POST_HANGMAN_GUESS_REQUEST,
-  postHangmanGuessRequest,
   postHangmanGuessSuceeded,
   postHangmanGuessFaild
 } from '../actions/index';
@@ -32,8 +30,6 @@ const SERVER_ADDRESS = 'http://localhost:8081';
 
 export const postHangmanGuess = (id, gameServerID, letter, fetch = window.fetch) => {
   return (dispatch) => {
-    console.log("postHangmanGuess-----------------------");// eslint-disable-line
-    console.log(id, gameServerID, letter);// eslint-disable-line
     return fetch(
       SERVER_ADDRESS + '/games/' + gameServerID + '/moves',
       {
@@ -150,18 +146,14 @@ export const postNewHangmanwGame = (id, fetch = window.fetch) => {
 
 const gameServerMiddleware = (store) => (next) => {
   return (action) => {
-    console.log("gameServerMiddleware-----------------------");// eslint-disable-line
-    console.log(action);// eslint-disable-line
     if (action.type === POST_NEW_HANGMAN_GAME_REQUEST) {
-      const id = action.payload.id;
-      store.dispatch(postNewHangmanwGame(id));
+      store.dispatch(postNewHangmanwGame(action.payload.id));
     } else if (action.type === POST_NEW_RPS_GAME_REQUEST) {
-      const id = action.payload.id;
-      store.dispatch(postNewRpswGame(id));
+      store.dispatch(postNewRpswGame(action.payload.id));
     } else if (action.type === POST_RPS_GUESS_REQUEST) {
-      store.dispatch(postRpsGuess(action.payload.id, action.payload.gameServerId));
+      store.dispatch(postRpsGuess(action.payload.id, action.payload.gameServerId, action.payload.guess));
     } else if (action.type === POST_HANGMAN_GUESS_REQUEST) {
-      store.dispatch(postHangmanGuess(action.payload.id, action.payload.gameServerId));
+      store.dispatch(postHangmanGuess(action.payload.id, action.payload.gameServerId, action.payload.guess));
     }
     return next(action);
   };

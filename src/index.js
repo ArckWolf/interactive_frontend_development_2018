@@ -27,7 +27,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-store.subscribe(() => {
-  console.log('Got new state', store.getState()); // eslint-disable-line no-console
-});

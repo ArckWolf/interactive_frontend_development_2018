@@ -28,11 +28,12 @@ export const postNewRpsGameFaild = (reason) => ({
 });
 
 export const POST_RPS_GUESS_REQUEST = 'POST_RPS_GUESS_REQUEST';
-export const postRpsGuessRequest = (id) => ({
+export const postRpsGuessRequest = (id, letter) => ({
   type: POST_RPS_GUESS_REQUEST,
   payload: {
     id: id,
-    gameServerId: games[id]
+    gameServerId: games[id],
+    guess: letter
   }
 });
 
@@ -76,11 +77,12 @@ export const postNewHangmanGameFaild = (reason) => ({
 });
 
 export const POST_HANGMAN_GUESS_REQUEST = 'POST_HANGMAN_GUESS_REQUEST';
-export const postHangmanGuessRequest = (id) => ({
+export const postHangmanGuessRequest = (id, letter) => ({
   type: POST_HANGMAN_GUESS_REQUEST,
   payload: {
     id: id,
-    gameServerId: games[id]
+    gameServerId: games[id],
+    guess: letter
   }
 });
 
