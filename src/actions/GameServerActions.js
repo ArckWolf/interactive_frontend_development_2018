@@ -32,8 +32,6 @@ export const postHangmanGuess = (id, letter, fetch = window.fetch) => {
   return (dispatch) => {
     const requestAction = postHangmanGuessRequest(id);
     dispatch(requestAction);
-    console.log('requestAction//////////////.....'); // eslint-disable-line
-    console.log(requestAction); // eslint-disable-line
     const gameServerID = requestAction.payload.gameServerId;
     return fetch(
       SERVER_ADDRESS + '/games/' + gameServerID + '/moves',
@@ -66,8 +64,6 @@ export const postRpsGuess = (id, letter, fetch = window.fetch) => {
   return (dispatch) => {
     const requestAction = postRpsGuessRequest(id);
     dispatch(requestAction);
-    console.log('requestAction//////////////.....'); // eslint-disable-line
-    console.log(requestAction); // eslint-disable-line
     const gameServerID = requestAction.payload.gameServerId;
     return fetch(
       SERVER_ADDRESS + '/games/' + gameServerID + '/moves',

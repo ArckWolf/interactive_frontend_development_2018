@@ -5,8 +5,28 @@ import PropTypes from 'prop-types';
 
 const Game = (props) => {
   let PlayArea;
+  let fetching = (<div></div>);
+  if (props.game.fetchGuessState.inFlight) {
+    fetching = (<h3 id="sending">Sending your guess...</h3>);
+  } else if (props.game.fetchGuessState.error) {
+    fetching = (
+      <div id="error">
+        <h3>Failed to fetch responce for your guess..</h3>
+        <p>{props.game.fetchGuessState.error}</p>
+      </div>
+    );
+  }
 
-  if (props.game.status === 'finished') {
+  if (props.game.fetchGameState.inFlight) {
+    PlayArea = (<h3 id="sending">Fetching RPS game...</h3>);
+  } else if (props.game.fetchGameState.error) {
+    PlayArea = (
+      <div id="error">
+        <h3>Failed to fetch the RPS Game</h3>
+        <p>{props.game.fetchGameState.error}</p>
+      </div>
+    );
+  } else if (props.game.status === 'finished') {
     PlayArea = (
       <p> You won! </p>
     );
@@ -14,6 +34,7 @@ const Game = (props) => {
     PlayArea = (
       <div>
         <p> Guess either Rock(R), Paper(P) or Scissors(S) </p>
+        {fetching}
         <InputChangesOnSubmit gameID={props.game.id} onSubmit={props.submit} type='text' maxLength={1} />
       </div>
     );

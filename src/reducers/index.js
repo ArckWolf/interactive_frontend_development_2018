@@ -1,33 +1,31 @@
 import {
+  POST_NEW_HANGMAN_GAME_REQUEST,
   POST_NEW_HANGMAN_GAME_SUCCEEDED,
+  POST_NEW_HANGMAN_GAME_FAILD,
+  POST_NEW_RPS_GAME_REQUEST,
   POST_NEW_RPS_GAME_SUCCEEDED,
+  POST_NEW_RPS_GAME_FAILD,
+  POST_RPS_GUESS_REQUEST,
+  POST_RPS_GUESS_FAILD,
   POST_RPS_GUESS_SUCSEEDED,
+  POST_HANGMAN_GUESS_REQUEST,
   POST_HANGMAN_GUESS_SUCSEEDED,
-  RPS_GAME_CREATED,
-  HANGMAN_GAME_CREATED,
-  HANGMAN_GUESS_SUBMITTED,
-  RPS_GUESS_SUBMITTED
+  POST_HANGMAN_GUESS_FAILD
 } from '../actions/index.js';
 
 const initialState = {};
 
 const gameReducer = (state = initialState, action) => {
   switch (action.type) {
-    case HANGMAN_GAME_CREATED: {
-      return Object.assign({}, state, {[action.payload.id]: action.payload});
-    }
-    case RPS_GAME_CREATED: {
-      return Object.assign({}, state, {[action.payload.id]: action.payload});
-    }
-    case HANGMAN_GUESS_SUBMITTED: {
-      const newGame = state[action.payload.id];
-      const newGameState = Object.assign({}, newGame, action.payload);
-      return Object.assign({}, state, {[newGame.id]: newGameState});
-    }
-    case RPS_GUESS_SUBMITTED: {
-      const newGame = state[action.payload.id];
-      const newGameState = Object.assign({}, newGame, action.payload);
-      return Object.assign({}, state, {[newGame.id]: newGameState});
+    case POST_NEW_RPS_GAME_REQUEST: {
+      const newGame = {
+        id: action.payload.id,
+        type: 'rps',
+        moves: [],
+        fetchGameState: {inFlight: true},
+        fetchGuessState: {inFlight: false}
+      };
+      return Object.assign({}, state, {[action.payload.id]: newGame});
     }
     case POST_NEW_RPS_GAME_SUCCEEDED: {
       const newGame = {
@@ -36,7 +34,30 @@ const gameReducer = (state = initialState, action) => {
         status: action.payload.game.status,
         won: action.payload.game.won,
         moves: [],
-        inFlight: false
+        fetchGameState: {inFlight: false},
+        fetchGuessState: {inFlight: false}
+      };
+      return Object.assign({}, state, {[action.payload.id]: newGame});
+    }
+    case POST_NEW_RPS_GAME_FAILD: {
+      const game = state[action.payload.id];
+      const newState = {
+        fetchGameState: {
+          inFlight: false,
+          error: action.payload.error
+        }
+      };
+      const newGameState = Object.assign({}, game, newState);
+      return Object.assign({}, state, {[game.id]: newGameState});
+    }
+    case POST_NEW_HANGMAN_GAME_REQUEST: {
+      const newGame = {
+        id: action.payload.id,
+        type: 'hangman',
+        wordView: '',
+        wrongCounter: 0,
+        fetchGameState: {inFlight: true},
+        fetchGuessState: {inFlight: false}
       };
       return Object.assign({}, state, {[action.payload.id]: newGame});
     }
@@ -57,9 +78,29 @@ const gameReducer = (state = initialState, action) => {
         won: action.payload.game.won,
         wrongCounter: action.payload.game.wrongGuessCount,
         wordView: newWordView,
-        inFlight: false
+        fetchGameState: {inFlight: false},
+        fetchGuessState: {inFlight: false}
       };
       return Object.assign({}, state, {[action.payload.id]: newGame});
+    }
+    case POST_NEW_HANGMAN_GAME_FAILD: {
+      const game = state[action.payload.id];
+      const newState = {
+        fetchGameState: {
+          inFlight: false,
+          error: action.payload.error
+        }
+      };
+      const newGameState = Object.assign({}, game, newState);
+      return Object.assign({}, state, {[game.id]: newGameState});
+    }
+    case POST_RPS_GUESS_REQUEST: {
+      const game = state[action.payload.id];
+      const newState = {
+        fetchGuessState: {inFlight: true}
+      };
+      const newGameState = Object.assign({}, game, newState);
+      return Object.assign({}, state, {[game.id]: newGameState});
     }
     case POST_RPS_GUESS_SUCSEEDED: {
       const game = state[action.payload.id];
@@ -68,7 +109,26 @@ const gameReducer = (state = initialState, action) => {
         status: action.payload.game.status,
         won: action.payload.game.won,
         moves: newMoves,
-        inFlight: false
+        fetchGuessState: {inFlight: false}
+      };
+      const newGameState = Object.assign({}, game, newState);
+      return Object.assign({}, state, {[game.id]: newGameState});
+    }
+    case POST_RPS_GUESS_FAILD: {
+      const game = state[action.payload.id];
+      const newState = {
+        fetchGuessState: {
+          inFlight: false,
+          error: action.payload.error
+        }
+      };
+      const newGameState = Object.assign({}, game, newState);
+      return Object.assign({}, state, {[game.id]: newGameState});
+    }
+    case POST_HANGMAN_GUESS_REQUEST: {
+      const game = state[action.payload.id];
+      const newState = {
+        fetchGuessState: {inFlight: true}
       };
       const newGameState = Object.assign({}, game, newState);
       return Object.assign({}, state, {[game.id]: newGameState});
@@ -88,7 +148,18 @@ const gameReducer = (state = initialState, action) => {
         won: action.payload.game.won,
         wrongCounter: action.payload.game.wrongGuessCount,
         wordView: newWordView,
-        inFlight: false
+        fetchGuessState: {inFlight: false}
+      };
+      const newGameState = Object.assign({}, game, newState);
+      return Object.assign({}, state, {[game.id]: newGameState});
+    }
+    case POST_HANGMAN_GUESS_FAILD: {
+      const game = state[action.payload.id];
+      const newState = {
+        fetchGuessState: {
+          inFlight: false,
+          error: action.payload.error
+        }
       };
       const newGameState = Object.assign({}, game, newState);
       return Object.assign({}, state, {[game.id]: newGameState});
