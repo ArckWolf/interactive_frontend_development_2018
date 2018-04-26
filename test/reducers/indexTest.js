@@ -1,81 +1,119 @@
 import reducer from '../../src/reducers/index';
 import {
-    rpsGameCreated,
-    hangmanGameCreated,
-    submitHangman,
-    submitRPS
+  postNewRpsGameRequest,
+  postNewRpsGameSucceeded,
+  postNewRpsGameFaild,
+
+  postNewHangmanGameRequest,
+  postNewHangmanGameFaild,
 } from '../../src/actions/index';
 
+it('sets request in flight when new rps game requested', () => {
+  expect(
+    reducer(undefined, postNewRpsGameRequest())
+  ).to.eql(
+    {
+      '1': {
+        'fetchGameState': {
+          'inFlight': true
+        },
+        'fetchGuessState': {
+          'inFlight': false
+        },
+        'id': 1,
+        'moves': [],
+        'type': 'rps'
+      }
+    }
+  );
+});
 
-describe('reducer', () => {
-  it('has nothing initially', () => {
-    expect(reducer(undefined, {})).to.eql({});
-  });
+it('sets request not in flight when new rps game requested Succeeded', () => {
+  const initialState = reducer(undefined, postNewRpsGameRequest());
+  expect(
+    reducer(initialState, postNewRpsGameSucceeded({id: 2, game: initialState[2]}))
+  ).to.eql(
+    {
+      '2': {
+        'fetchGameState': {
+          'inFlight': false
+        },
+        'fetchGuessState': {
+          'inFlight': false
+        },
+        'id': 2,
+        'moves': [],
+        'status': undefined,
+        'type': 'rps',
+        'won': undefined
+      }
+    }
+  );
+});
 
-  it('create new RPS game when new button RPS game pressed', () => {
-    const previousState = {};
-    const newGmae = rpsGameCreated();
-    const newState = reducer(previousState, newGmae);
+it('sets request not in flight when new rps game requested Fail', () => {
+  const initialState = reducer(undefined, postNewRpsGameRequest());
+  expect(
+    reducer(initialState, postNewRpsGameFaild({id: 3, game: initialState[2]}))
+  ).to.eql(
+    {
+      '3': {
+        'fetchGameState': {
+          'error': undefined,
+          'inFlight': false
+        },
+        'fetchGuessState': {
+          'inFlight': false
+        },
+        'id': 3,
+        'moves': [],
+        'type': 'rps'
+      }
+    }
+  );
+});
 
-    expect(newState).to.be.an.instanceof(Object);
-    expect(newState[newGmae.payload.id]).to.be.an.instanceof(Object);
-    expect(newState[newGmae.payload.id].id).to.eq(newGmae.payload.id);
-    expect(newState[newGmae.payload.id].type).to.eq('RPS');
-    expect(newState[newGmae.payload.id].moves).to.be.an('array').that.have.lengthOf(0);
-  });
+it('sets request in flight when new hangman game requested', () => {
+  expect(
+    reducer(undefined, postNewHangmanGameRequest())
+  ).to.eql(
+    {
+      '4': {
+        'fetchGameState': {
+          'inFlight': true
+        },
+        'fetchGuessState': {
+          'inFlight': false
+        },
+        'id': 4,
+        'type': 'hangman',
+        'wordView': '',
+        'wrongCounter': 0
+      }
+    }
+  );
+});
 
-  it('create new Hangman game when new button Hangman game pressed', () => {
-    const previousState = {};
-    const newGmae = hangmanGameCreated();
-    const newState = reducer(previousState, newGmae);
 
-    expect(newState).to.be.an.instanceof(Object);
-    expect(newState[newGmae.payload.id]).to.be.an.instanceof(Object);
-    expect(newState[newGmae.payload.id].id).to.eq(newGmae.payload.id);
-    expect(newState[newGmae.payload.id].type).to.eq('Hangman');
-    expect(newState[newGmae.payload.id].wrongCounter).to.eq(0);
-    expect(newState[newGmae.payload.id].wordView).to.be.a('string').lengthOf.above(0);
-  });
-
-  it('submitHangman false', () => {
-    const newGmae = hangmanGameCreated();
-    const previousState = {};
-    const newPreviousState = reducer(previousState, newGmae);
-    const newState = reducer(newPreviousState, submitHangman(newGmae.payload.id, 'x'));
-
-    expect(newState[newGmae.payload.id].wrongCounter).to.eq(1);
-    expect(newState[newGmae.payload.id].wordView).not.to.have.string('x');
-    expect(newState[newGmae.payload.id].status).to.be.a('string').lengthOf.above(0);
-  });
-
-  it('submitHangman true', () => {
-    const newGmae = hangmanGameCreated();
-    const previousState = {};
-    const newPreviousState = reducer(previousState, newGmae);
-    const newState = reducer(newPreviousState, submitHangman(newGmae.payload.id, 'r'));
-
-    expect(newState[newGmae.payload.id].wrongCounter).to.eq(0);
-    expect(newState[newGmae.payload.id].wordView).to.have.string('r');
-    expect(newState[newGmae.payload.id].status).to.be.a('string').lengthOf.above(0);
-  });
-
-  it('submitRPS false', () => {
-    const newGmae = rpsGameCreated();
-    const previousState = {};
-    const newPreviousState = reducer(previousState, newGmae);
-    const newState = reducer(newPreviousState, submitRPS(newGmae.payload.id, 'x'));
-
-    expect(newState[newGmae.payload.id].moves).to.be.an('array').that.is.empty;
-    expect(newState[newGmae.payload.id].status).to.be.a('string').lengthOf.above(0);
-  });
-
-  it('submitRPS true', () => {
-    const newGmae = rpsGameCreated();
-    const previousState = {};
-    const newPreviousState = reducer(previousState, newGmae);
-    const newState = reducer(newPreviousState, submitRPS(newGmae.payload.id, 'R'));
-
-    expect(newState[newGmae.payload.id].moves).to.be.an('array').that.have.lengthOf(1);
-    expect(newState[newGmae.payload.id].status).to.be.a('string').lengthOf.above(0);
-  });
+it('sets request not in flight when new hangman game requested Fail', () => {
+  const initialState = reducer(undefined, postNewHangmanGameRequest());
+  expect(
+    reducer(initialState, postNewHangmanGameFaild({id: 5, game: initialState[2]}))
+  ).to.eql(
+    {
+      '5': {
+        'fetchGameState': {
+          'error': undefined,
+          'inFlight': false
+        },
+        'fetchGuessState': {
+          'inFlight': false
+        },
+        'id': 5,
+        'type': 'hangman',
+        'wordView': '',
+        'wrongCounter': 0
+      }
+    }
+  );
 });

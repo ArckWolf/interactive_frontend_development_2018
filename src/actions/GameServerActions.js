@@ -28,11 +28,10 @@ const GUESS_CHAR_TO_GUESS = {
 
 const SERVER_ADDRESS = 'http://localhost:8081';
 
-export const postHangmanGuess = (id, letter, fetch = window.fetch) => {
+export const postHangmanGuess = (id, gameServerID, letter, fetch = window.fetch) => {
   return (dispatch) => {
     const requestAction = postHangmanGuessRequest(id);
     dispatch(requestAction);
-    const gameServerID = requestAction.payload.gameServerId;
     return fetch(
       SERVER_ADDRESS + '/games/' + gameServerID + '/moves',
       {
@@ -60,11 +59,10 @@ export const postHangmanGuess = (id, letter, fetch = window.fetch) => {
   };
 };
 
-export const postRpsGuess = (id, letter, fetch = window.fetch) => {
+export const postRpsGuess = (id, gameServerID, letter, fetch = window.fetch) => {
   return (dispatch) => {
     const requestAction = postRpsGuessRequest(id);
     dispatch(requestAction);
-    const gameServerID = requestAction.payload.gameServerId;
     return fetch(
       SERVER_ADDRESS + '/games/' + gameServerID + '/moves',
       {
@@ -92,11 +90,10 @@ export const postRpsGuess = (id, letter, fetch = window.fetch) => {
   };
 };
 
-export const postNewRpswGame = (fetch = window.fetch) => {
+export const postNewRpswGame = (id, fetch = window.fetch) => {
   return (dispatch) => {
     const requestAction = postNewRpsGameRequest();
     dispatch(requestAction);
-    const id = requestAction.payload.id;
     return fetch(
       SERVER_ADDRESS + '/games/',
       {
@@ -124,11 +121,10 @@ export const postNewRpswGame = (fetch = window.fetch) => {
   };
 };
 
-export const postNewHangmanwGame = (fetch = window.fetch) => {
+export const postNewHangmanwGame = (id, fetch = window.fetch) => {
   return (dispatch) => {
     const requestAction = postNewHangmanGameRequest();
     dispatch(requestAction);
-    const id = requestAction.payload.id;
     return fetch(
       SERVER_ADDRESS + '/games/',
       {
