@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import RPSGameContainer from '../../src/containers/RPS/Game';
-import HangmanGameContainer from '../../src/containers/Hangman/Game';
+import RPSGameComponent from '../../src/components/RPS/Game';
+import HangmanGameComponent from '../../src/components/Hangman/Game';
 
 describe('New game FLIGHT', () => {
    it('calls new RPS Fetching', () => {
@@ -14,7 +14,7 @@ describe('New game FLIGHT', () => {
       };
 
     const RpsGame = shallow(
-    <RPSGameContainer
+    <RPSGameComponent
     game={newGame}
     key={1}
     submit={sinon.stub()}/>
@@ -32,7 +32,7 @@ describe('New game FLIGHT', () => {
       };
 
     const RpsGame = shallow(
-    <RPSGameContainer
+    <RPSGameComponent
     game={newGame}
     key={1}
     submit={sinon.stub()}/>
@@ -50,7 +50,7 @@ describe('New game FLIGHT', () => {
       };
 
     const RpsGame = shallow(
-    <RPSGameContainer
+    <RPSGameComponent
     game={newGame}
     key={1}
     submit={sinon.stub()}/>
@@ -70,7 +70,7 @@ describe('New game FLIGHT', () => {
       };
 
     const RpsGame = shallow(
-    <HangmanGameContainer
+    <HangmanGameComponent
     game={newGame}
     key={1}
     submit={sinon.stub()}/>
@@ -89,7 +89,7 @@ describe('New game FLIGHT', () => {
       };
 
     const RpsGame = shallow(
-    <HangmanGameContainer
+    <HangmanGameComponent
     game={newGame}
     key={1}
     submit={sinon.stub()}/>
@@ -108,7 +108,7 @@ describe('New game FLIGHT', () => {
       };
 
     const RpsGame = shallow(
-    <HangmanGameContainer
+    <HangmanGameComponent
     game={newGame}
     key={1}
     submit={sinon.stub()}/>
@@ -129,7 +129,7 @@ describe('New Guess FLIGHT', () => {
        };
 
      const RpsGame = shallow(
-     <RPSGameContainer
+     <RPSGameComponent
      game={newGame}
      key={1}
      submit={sinon.stub()}/>
@@ -147,7 +147,7 @@ describe('New Guess FLIGHT', () => {
        };
 
      const RpsGame = shallow(
-     <RPSGameContainer
+     <RPSGameComponent
      game={newGame}
      key={1}
      submit={sinon.stub()}/>
@@ -165,7 +165,7 @@ describe('New Guess FLIGHT', () => {
        };
 
      const RpsGame = shallow(
-     <RPSGameContainer
+     <RPSGameComponent
      game={newGame}
      key={1}
      submit={sinon.stub()}/>
@@ -185,7 +185,7 @@ describe('New Guess FLIGHT', () => {
        };
 
      const RpsGame = shallow(
-     <HangmanGameContainer
+     <HangmanGameComponent
      game={newGame}
      key={1}
      submit={sinon.stub()}/>
@@ -204,7 +204,7 @@ describe('New Guess FLIGHT', () => {
        };
 
      const RpsGame = shallow(
-     <HangmanGameContainer
+     <HangmanGameComponent
      game={newGame}
      key={1}
      submit={sinon.stub()}/>
@@ -223,7 +223,7 @@ describe('New Guess FLIGHT', () => {
        };
 
      const RpsGame = shallow(
-     <HangmanGameContainer
+     <HangmanGameComponent
      game={newGame}
      key={1}
      submit={sinon.stub()}/>

@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RPSGameContainer from '../containers/RPS/Game';
-import HangmanGameContainer from '../containers/Hangman/Game';
+import RPSGameComponent from '../components/RPS/Game';
+import HangmanGameComponent from '../components/Hangman/Game';
 
 const GameList = (props) => {
   const gameElements = props.games.map((game) => {
     if (game.type === 'rps') {
         return (
-            <RPSGameContainer game={game} key={game.id} submit={props.submitRPS}/>
+            <RPSGameComponent game={game} key={game.id} submit={props.submitRPS}/>
         );
     } else {
         return (
-            <HangmanGameContainer game={game} key={game.id} submit={props.submitHangman}/>
+            <HangmanGameComponent game={game} key={game.id} submit={props.submitHangman}/>
         );
     }
   });

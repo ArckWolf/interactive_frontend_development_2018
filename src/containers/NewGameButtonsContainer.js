@@ -19,8 +19,6 @@ NewGameButtonsContainer.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('dispatch//////////////.....'); // eslint-disable-line
-  console.log(dispatch); // eslint-disable-line
   const newLocal = {
     rpsGameCreated: () => dispatch(postNewRpsGameRequest()),
     hangmanGameCreated: () => dispatch(postNewHangmanGameRequest())
