@@ -1,32 +1,25 @@
 import React from 'react';
 import MoveHistory from '../../components/RPS/MoveHistory';
-import InputChangesOnSubmit from '../../components/Inputs/InputChangesOnSubmit';
+import InputChangesOnSubmit from '../../components/InputChangesOnSubmit';
 import PropTypes from 'prop-types';
 
-const Game = (props) => {
-  let PlayArea;
-  let fetching = (<div></div>);
-  if (props.game.fetchGuessState.inFlight) {
-    fetching = (<h3 id="sending">Sending your guess...</h3>);
-  } else if (props.game.fetchGuessState.error) {
-    fetching = (
-      <div id="error">
-        <h3>Failed to fetch responce for your guess..</h3>
-        <p>{props.game.fetchGuessState.error}</p>
-      </div>
-    );
-  }
+const GUESS_CHAR_TO_GUESS = {
+  'R': 'ROCK',
+  'P': 'PAPER',
+  'S': 'SCISSORS'
+};
 
-  if (props.game.fetchGameState.inFlight) {
-    PlayArea = (<h3 id="sending">Fetching RPS game...</h3>);
-  } else if (props.game.fetchGameState.error) {
-    PlayArea = (
-      <div id="error">
-        <h3>Failed to fetch the RPS Game</h3>
-        <p>{props.game.fetchGameState.error}</p>
-      </div>
-    );
-  } else if (props.game.status === 'finished') {
+const Game = ({status, onGuess, moves}) => {
+  let PlayArea;
+
+  const onSubmit = (guessChar) => {
+    const guess = GUESS_CHAR_TO_GUESS[guessChar];
+    if (guess) {
+      onGuess(guess);
+    }
+  };
+
+  if (status === 'finished') {
     PlayArea = (
       <p> You won! </p>
     );
@@ -34,27 +27,29 @@ const Game = (props) => {
     PlayArea = (
       <div>
         <p> Guess either Rock(R), Paper(P) or Scissors(S) </p>
-        {fetching}
-        <InputChangesOnSubmit gameID={props.game.id} onSubmit={props.submit} type='text' maxLength={1} />
+        {status === 'guess_in_flight' ? <div>Submitting...</div> : null}
+        <InputChangesOnSubmit
+          onSubmit={onSubmit}
+          type='text'
+          maxLength={1}
+          disabled={status === 'guess_in_flight'}
+        />
       </div>
     );
   }
-
   return (
     <div className='game'>
       <h3> Rock Paper Scissors </h3>
       {PlayArea}
-      <MoveHistory moves={props.game.moves} />
+      <MoveHistory moves={moves} />
     </div>
   );
 };
 
 Game.propTypes = {
-  game: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    moves: PropTypes.array.isRequired
-  }),
-  submit: PropTypes.func.isRequired
+  onGuess: PropTypes.func.isRequired,
+  status: PropTypes.string.isRequired,
+  moves: PropTypes.array.isRequired
 };
 
 export default Game;

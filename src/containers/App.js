@@ -1,6 +1,7 @@
 import React from 'react';
-import NewGameButtonsContainer from './NewGameButtonsContainer';
-import OngoingGamesContainer from './OngoingGamesContainer';
+
+import Games from './GamesContainer';
+import GameButtons from './GameButtonsContainer';
 
 const App = () => {
   return (
@@ -8,11 +9,10 @@ const App = () => {
       <div className="app-header">
         <h1>Game Lobby</h1>
       </div>
-        <NewGameButtonsContainer />
-        <OngoingGamesContainer />
+      <GameButtons />
+      <Games />
     </div>
   );
 };
 
 export default App;
-

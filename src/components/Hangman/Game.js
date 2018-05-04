@@ -1,74 +1,40 @@
 import React from 'react';
-import InputChangesOnChange from '../../components/Inputs/InputChangesOnChange';
+import InputChangesOnSubmit from '../../components/InputChangesOnSubmit';
+import HangmanProgress from '../../components/Hangman/HangmanProgress';
 import PropTypes from 'prop-types';
-import HangingMan from './HangingMan';
-import Word from './Word';
 
-const Game = (props) => {
+const Game = ({status, wrongGuessCount, letters, onGuess}) => {
   let PlayArea;
-  let fetching = (<div></div>);
-  if (props.game.fetchGuessState.inFlight) {
-    fetching = (<h3 id="sending">Sending your guess...</h3>);
-  } else if (props.game.fetchGuessState.error) {
-    fetching = (
-      <div id="error">
-        <h3>Failed to fetch responce for your guess..</h3>
-        <p>{props.game.fetchGuessState.error}</p>
+
+  if (['waiting_for_move', 'guess_in_flight'].includes(status)) {
+    PlayArea = (
+      <div className='play-area'>
+      <p> Guess a letter from the word: </p>
+      {status === 'guess_in_flight' ? <div>Submitting...</div> : null}
+      <InputChangesOnSubmit
+        onSubmit={onGuess}
+        type='text'
+        maxLength={1}
+        submitImmediately={true}
+        disabled={status === 'guess_in_flight'}
+      />
       </div>
     );
   }
-
-  if (props.game.fetchGameState.inFlight) {
-    PlayArea = (<h3 id="sending">Fetching Hangman game...</h3>);
-  } else if (props.game.fetchGameState.error) {
-    PlayArea = (
-      <div id="error">
-        <h3>Failed to fetch the Hangman Game</h3>
-        <p>{props.game.fetchGameState.error}</p>
-      </div>
-    );
-  } else if (props.game.status === 'finished' && props.game.won === true) {
-    PlayArea = (
-      <div>
-        <Word wordView={props.game.wordView} />
-        <HangingMan imageId={props.game.wrongCounter} />
-    </div>
-    );
-  } else if (props.game.status === 'finished' && props.game.won === false) {
-    PlayArea = (
-      <div>
-        <HangingMan imageId={props.game.wrongCounter} />
-      </div>
-    );
-  } else {
-    PlayArea = (
-      <div>
-        Guess a letter from the word:
-        {fetching}
-        <InputChangesOnChange gameID={props.game.id} onSubmit={props.submit} type='text' maxLength={1} />
-        <Word wordView={props.game.wordView} />
-        <HangingMan imageId={props.game.wrongCounter} />
-      </div>
-    );
-  }
-
   return (
-    <div className='game'>
-      <h3> Hangman </h3>
-      <div>
-        {PlayArea}
-      </div>
+    <div className='game hangman'>
+    <h3> Hangman </h3>
+    {PlayArea}
+    <HangmanProgress wrongGuessCount={wrongGuessCount} letters={letters}/>
     </div>
   );
 };
 
- Game.propTypes = {
-  game: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    wordView: PropTypes.string.isRequired,
-    wrongCounter: PropTypes.number.isRequired
-  }),
-  submit: PropTypes.func.isRequired
+Game.propTypes = {
+  onGuess: PropTypes.func.isRequired,
+  wrongGuessCount: PropTypes.number.isRequired,
+  letters: PropTypes.array.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default Game;

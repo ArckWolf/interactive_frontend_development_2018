@@ -1,77 +1,50 @@
-const POSSIBLE_WORDS = {
-  1: 'barracuda',
-  2: 'pufferfish',
-  3: 'oyster',
-  4: 'stringray',
-};
+const TARGET_WORDS = ['barracuda', 'pufferfish', 'oyster', 'stingray'];
+const LOSS_WRONG_GUESS_COUNT = 6;
 
 class Hangman {
-  constructor() {
-    this.status = 'waiting';
-    this.wrongCounter = 0;
-    this.word = this.generateWord();
+  static generate() {
+    return new Hangman(TARGET_WORDS[Math.floor(Math.random() * TARGET_WORDS.length)]);
+  }
+
+  constructor(targetWord) {
+    this.status = 'waiting_for_move';
+    this.type = 'hangman';
+    this.wrongGuessCount = 0;
+    this.targetWord = targetWord;
+    this.letterStatuses = targetWord.split('').map(
+      (c) => ({guessedLetter: undefined, target: c})
+    );
   }
 
   getStatus() {
     return this.status;
   }
 
-  getImageId() {
-    return this.wrongCounter;
+  getWrongGuessCount() {
+    return this.wrongGuessCount;
   }
 
-  getWordView() {
-    return this.word.wordView;
+  getGuessedLetters() {
+    return this.letterStatuses.map((s) => (s.guessedLetter));
   }
 
-  generateWord() {
-    const wordId = Math.floor(Math.random() * 4)+1;
-    const wordView = this.generateEmtyStringForUserView(wordId);
-    return {wordId: wordId, wordView: wordView};
-  }
-
-  generateEmtyStringForUserView(wordId) {
-    let view='';
-    for (let index = 0; index < POSSIBLE_WORDS[wordId].length; index++) {
-        view += '_';
+  guess(letter) {
+    if (this.targetWord.indexOf(letter) === -1) {
+      this.wrongGuessCount = this.wrongGuessCount + 1;
+      if (this.getWrongGuessCount() === LOSS_WRONG_GUESS_COUNT) {
+        this.status = 'lost';
       }
-    return view;
-  }
-
-  updateStringForUserView(guess) {
-    let newView = '';
-    for (let index = 0; index < POSSIBLE_WORDS[this.word.wordId].length; index++) {
-        if (POSSIBLE_WORDS[this.word.wordId].charAt(index) == guess) {
-          newView += guess;
-        } else if (POSSIBLE_WORDS[this.word.wordId].charAt(index) == this.word.wordView.charAt(index)) {
-          newView += this.word.wordView.charAt(index);
-        } else {
-          newView += '_';
-        }
-      }
-    return newView;
-  }
-
-  guess(guess) {
-    if (POSSIBLE_WORDS[this.word.wordId].includes(guess) && !this.word.wordView.includes(guess)) {
-        this.word.wordView = this.updateStringForUserView(guess);
-
-        if (!this.word.wordView.includes('_')) {
-          this.status = 'finished_won';
-
-          return {result: true, wordView: this.word.wordView};
-        } else {
-          return {result: true, wordView: this.word.wordView};
-        }
     } else {
-        this.wrongCounter+=1;
-        if (this.wrongCounter == 6) {
-          this.status = 'finished_lost';
-
-          return {result: false, wordView: this.word.wordView};
+      this.letterStatuses = this.letterStatuses.map((status) => {
+        if (status.target === letter) {
+          return Object.assign({}, status, {guessedLetter: letter});
         } else {
-          return {result: false, wordView: this.word.wordView};
+          return status;
         }
+      });
+      if (this.letterStatuses.every((s) => s.guessedLetter !== undefined)) {
+        this.status = 'won';
+      }
     }
   }
 }

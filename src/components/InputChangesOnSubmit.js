@@ -16,10 +16,10 @@ class InputChangesOnSubmit extends Component {
   }
 
   onKeyUp(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 || this.props.submitImmediately) {
       const submissionValue = this.state.value;
       this.setState({value: ''});
-      this.props.onSubmit(this.props.gameID, submissionValue);
+      this.props.onSubmit(submissionValue);
     }
   }
 
@@ -31,6 +31,7 @@ class InputChangesOnSubmit extends Component {
         onKeyUp={this.onKeyUp}
         value={this.state.value}
         onChange={this.onChange}
+        disabled={this.props.disabled}
       />
     );
   }
@@ -40,7 +41,8 @@ InputChangesOnSubmit.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   maxLength: PropTypes.number.isRequired,
-  gameID: PropTypes.number.isRequired
+  submitImmediately: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 export default InputChangesOnSubmit;

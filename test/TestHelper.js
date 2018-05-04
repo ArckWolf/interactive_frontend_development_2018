@@ -9,6 +9,8 @@ global.chai = chai;
 global.expect = chai.expect;
 global.sinon = sinon;
 
+configure({adapter: new Adapter()});
+
 chai.use(chaiEnzyme());
 chai.use(sinonChai);
 
@@ -19,13 +21,10 @@ require('babel-register')({
       'env',
       {
         'modules': 'commonjs',
-        'targets': {'node': '8.9'}
+        'targets': {'node': '8.10'}
       }
     ],
-    ['react']
+    'react'
   ],
   plugins: ['transform-object-rest-spread']
 });
-
-
-configure({adapter: new Adapter()});

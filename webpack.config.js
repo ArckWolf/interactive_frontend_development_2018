@@ -32,8 +32,8 @@ module.exports = {
       toType: 'file'
     }]),
     new CopyWebpackPlugin([{
-      from: './img',
-      to: './img'
+      from: './images',
+      to: './images'
     }])
   ]
 };
