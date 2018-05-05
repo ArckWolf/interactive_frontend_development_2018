@@ -6,9 +6,9 @@ const mapDispatchToProps = (dispatch) => ({
   createGame: (type) => dispatch(createGameRequested(type))
 });
 
-const mapStateToProps = ({createGameRequestInFlight, playerId}) => ({
-  createRequestInFlight: createGameRequestInFlight,
-  playerId: playerId,
+const mapStateToProps = ({gameReducer, loginReducer}) => ({
+  createRequestInFlight: gameReducer.createGameRequestInFlight,
+  playerId: loginReducer.playerId,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGameButtons);

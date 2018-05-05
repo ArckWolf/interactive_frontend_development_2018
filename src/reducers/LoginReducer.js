@@ -13,25 +13,25 @@ import {
     logOutRequestInFlight: false,
     playerId: '',
     error: '',
-    players: {}
+    players: {},
   };
-  const reducer = (state = initialState, action) => {
+  const loginReducer = (state = initialState, action) => {
     if (action.type === LOG_IN_REQUESTED) {
       return Object.assign({}, state, {logInRequestInFlight: true});
     } else if (action.type === LOG_IN_FAILED) {
       return Object.assign({}, state, {logInRequestInFlight: false, error: action.payload});
     } else if (action.type === LOG_IN_SUCCEEDED) {
-      return Object.assign({}, state, {logInRequestInFlight: false});
+      return Object.assign({}, state, {logInRequestInFlight: false, error: ''});
     } else if (action.type === LOG_OUT_REQUESTED) {
       return Object.assign({}, state, {logOutRequestInFlight: true});
     } else if (action.type === LOG_OUT_SUCCEEDED) {
-      return Object.assign({}, state, {logOutRequestInFlight: false, playerId: '', games: {}});
+      return Object.assign({}, state, {logOutRequestInFlight: false, playerId: '', error: '', games: {}});
   
     } else if (action.type === MESSAGE_RECEIVED) {
       console.log('-------------------------MESSAGE------------------------------');
       console.log(action);
       if (action.payload.eventName === 'connection:accepted') {
-        return Object.assign({}, state, {playerId: action.payload.payload.playerId});
+        return Object.assign({}, state, {playerId: action.payload.payload.playerId, error: ''});
       } else if (action.payload.eventName === 'connection:player-name-taken') {
         return Object.assign({}, state, {error: action.payload.payload.reason});
       } else if (action.payload.eventName === 'online-players') {
@@ -41,5 +41,5 @@ import {
     return state;
   };
   
-  export default reducer;
+  export default loginReducer;
   

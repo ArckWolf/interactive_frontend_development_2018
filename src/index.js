@@ -6,8 +6,8 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 import gameServerMiddleware from './middlewares/GameServerMiddleware';
-import loggingMiddleware from './middlewares/LoggingMiddleware';
 import loginMiddleware from './middlewares/LoginMiddleware';
+import loggingMiddleware from './middlewares/LoggingMiddleware';
 
 
 const composeStoreEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

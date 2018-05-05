@@ -10,9 +10,10 @@ import {
   
   const initialState = {
     games: {},
-    createGameRequestInFlight: false
+    createGameRequestInFlight: false,
   };
-  const reducer = (state = initialState, action) => {
+
+  const gameReducer = (state = initialState, action) => {
     if (action.type === CREATE_GAME_REQUESTED) {
       return Object.assign({}, state, {createGameRequestInFlight: true});
     } else if (action.type === CREATE_GAME_FAILED) {
@@ -61,7 +62,7 @@ import {
       }
       const newGames = Object.assign({}, state.games, {[newGameState.id]: newGameState});
       return Object.assign({}, state, {games: newGames});
-    return state;
-  };
+  }
+  return state;
 };
-export default reducer;
+export default gameReducer;

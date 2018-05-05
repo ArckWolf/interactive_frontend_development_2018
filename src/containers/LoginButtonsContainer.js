@@ -7,11 +7,11 @@ const mapDispatchToProps = (dispatch) => ({
   logOutUser: () => dispatch(logOutRequested())
 });
 
-const mapStateToProps = ({logInRequestInFlight, logOutRequestInFlight, playerId, error}) => ({
-  logInRequestInFlight: logInRequestInFlight,
-  logOutRequestInFlight: logOutRequestInFlight,
-  playerId: playerId,
-  error: error
+const mapStateToProps = ({loginReducer}) => ({
+  logInRequestInFlight: loginReducer.logInRequestInFlight,
+  logOutRequestInFlight: loginReducer.logOutRequestInFlight,
+  playerId: loginReducer.playerId,
+  error: loginReducer.error
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateLoginButtons);
