@@ -43,7 +43,8 @@
     "redux": "^3.7.2",
     "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.2.0",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "websocket": "^1.0.25"
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",

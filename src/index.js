@@ -6,6 +6,9 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
 import gameServerMiddleware from './middlewares/GameServerMiddleware';
+import loggingMiddleware from './middlewares/LoggingMiddleware';
+import loginMiddleware from './middlewares/LoginMiddleware';
+
 
 const composeStoreEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -14,7 +17,9 @@ let store = createStore(
   composeStoreEnhancers(
     applyMiddleware(
       thunk,
-      gameServerMiddleware()
+      loginMiddleware(),
+      gameServerMiddleware(),
+      loggingMiddleware
     )
   )
 );

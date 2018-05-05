@@ -4,12 +4,16 @@ import {
   CREATE_GAME_FAILED,
   GAME_GUESS_REQUESTED,
   GAME_GUESS_SUCCEEDED,
-  GAME_GUESS_FAILED
+  GAME_GUESS_FAILED,
+  LOG_IN_REQUESTED,
+  LOG_IN_FAILED,
+  LOG_IN_SUCCEEDED
 } from '../actions';
 
 const initialState = {
   games: {},
-  createGameRequestInFlight: false
+  createGameRequestInFlight: false,
+  loginRequestInFlight: false
 };
 const reducer = (state = initialState, action) => {
   if (action.type === CREATE_GAME_REQUESTED) {
@@ -63,6 +67,12 @@ const reducer = (state = initialState, action) => {
     }
     const newGames = Object.assign({}, state.games, {[newGameState.id]: newGameState});
     return Object.assign({}, state, {games: newGames});
+  } else if (action.type === LOG_IN_REQUESTED) {
+    return Object.assign({}, state, {loginRequestInFlight: true});
+  } else if (action.type === LOG_IN_FAILED) {
+    return Object.assign({}, state, {loginRequestInFlight: false});
+  } else if (action.type === LOG_IN_SUCCEEDED) {
+    return Object.assign({}, state, {loginRequestInFlight: false});
   }
   return state;
 };
