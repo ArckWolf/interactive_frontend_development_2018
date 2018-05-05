@@ -5,7 +5,7 @@ import InputLogin from '../components/InputLogin';
 const CreateLoginButtons = ({loginUser, logOutUser, logInRequestInFlight,
                             logOutRequestInFlight, playerId, error}) => {
   const Login = (
-  <div>
+  <div className='logIn'>
     <InputLogin
         onSubmit={(name) => loginUser(name)}
       />

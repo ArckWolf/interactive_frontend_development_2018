@@ -13,6 +13,10 @@ h3 {
   text-align: center;
 }
 
+.logIn{
+  text-align: center;
+}
+
 .app {
   display: flex;
   flex-direction: column;

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
     CREATE_GAME_REQUESTED,
     CREATE_GAME_SUCCEEDED,
@@ -6,8 +5,9 @@ import {
     GAME_GUESS_REQUESTED,
     GAME_GUESS_SUCCEEDED,
     GAME_GUESS_FAILED,
+    LOG_OUT_SUCCEEDED
   } from '../actions';
-  
+
   const initialState = {
     games: {},
     createGameRequestInFlight: false,
@@ -25,7 +25,7 @@ import {
       } else {
         game = action.payload;
       }
-      return Object.assign({}, state, {games: Object.assign({}, state.games, {[game.id]: game}), 
+      return Object.assign({}, state, {games: Object.assign({}, state.games, {[game.id]: game}),
                                         createGameRequestInFlight: false});
     } else if (action.type === GAME_GUESS_REQUESTED) {
       const {gameId} = action.payload;
@@ -42,7 +42,7 @@ import {
     } else if (action.type === GAME_GUESS_SUCCEEDED) {
       const actionGameState = action.payload;
       let newGameState;
-  
+
       if (actionGameState.type === 'rps') {
         const move = actionGameState.move;
         newGameState = {
@@ -62,6 +62,8 @@ import {
       }
       const newGames = Object.assign({}, state.games, {[newGameState.id]: newGameState});
       return Object.assign({}, state, {games: newGames});
+  } else if (action.type === LOG_OUT_SUCCEEDED) {
+    return Object.assign({}, state, {games: {}});
   }
   return state;
 };

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
     LOG_IN_REQUESTED,
     LOG_IN_FAILED,
@@ -7,7 +6,7 @@ import {
     LOG_OUT_SUCCEEDED,
     MESSAGE_RECEIVED
   } from '../actions';
-  
+
   const initialState = {
     logInRequestInFlight: false,
     logOutRequestInFlight: false,
@@ -25,11 +24,9 @@ import {
     } else if (action.type === LOG_OUT_REQUESTED) {
       return Object.assign({}, state, {logOutRequestInFlight: true});
     } else if (action.type === LOG_OUT_SUCCEEDED) {
-      return Object.assign({}, state, {logOutRequestInFlight: false, playerId: '', error: '', games: {}});
-  
+      return Object.assign({}, state, {logOutRequestInFlight: false, playerId: '',
+      error: '', players: {}});
     } else if (action.type === MESSAGE_RECEIVED) {
-      console.log('-------------------------MESSAGE------------------------------');
-      console.log(action);
       if (action.payload.eventName === 'connection:accepted') {
         return Object.assign({}, state, {playerId: action.payload.payload.playerId, error: ''});
       } else if (action.payload.eventName === 'connection:player-name-taken') {
@@ -40,6 +37,5 @@ import {
     }
     return state;
   };
-  
+
   export default loginReducer;
-  
