@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   CREATE_GAME_REQUESTED,
   CREATE_GAME_SUCCEEDED,
@@ -7,13 +8,20 @@ import {
   GAME_GUESS_FAILED,
   LOG_IN_REQUESTED,
   LOG_IN_FAILED,
-  LOG_IN_SUCCEEDED
+  LOG_IN_SUCCEEDED,
+  LOG_OUT_REQUESTED,
+  LOG_OUT_SUCCEEDED,
+  MESSAGE_RECEIVED
 } from '../actions';
 
 const initialState = {
   games: {},
   createGameRequestInFlight: false,
-  loginRequestInFlight: false
+  logInRequestInFlight: false,
+  logOutRequestInFlight: false,
+  playerId: '',
+  error: '',
+  players: {}
 };
 const reducer = (state = initialState, action) => {
   if (action.type === CREATE_GAME_REQUESTED) {
@@ -27,11 +35,8 @@ const reducer = (state = initialState, action) => {
     } else {
       game = action.payload;
     }
-
-    return {
-      games: Object.assign({}, state.games, {[game.id]: game}),
-      createGameRequestInFlight: false,
-    };
+    return Object.assign({}, state, {games: Object.assign({}, state.games, {[game.id]: game}), 
+                                      createGameRequestInFlight: false});
   } else if (action.type === GAME_GUESS_REQUESTED) {
     const {gameId} = action.payload;
     const gameState = state.games[gameId];
@@ -68,11 +73,26 @@ const reducer = (state = initialState, action) => {
     const newGames = Object.assign({}, state.games, {[newGameState.id]: newGameState});
     return Object.assign({}, state, {games: newGames});
   } else if (action.type === LOG_IN_REQUESTED) {
-    return Object.assign({}, state, {loginRequestInFlight: true});
+    return Object.assign({}, state, {logInRequestInFlight: true});
   } else if (action.type === LOG_IN_FAILED) {
-    return Object.assign({}, state, {loginRequestInFlight: false});
+    return Object.assign({}, state, {logInRequestInFlight: false, error: action.payload});
   } else if (action.type === LOG_IN_SUCCEEDED) {
-    return Object.assign({}, state, {loginRequestInFlight: false});
+    return Object.assign({}, state, {logInRequestInFlight: false});
+  } else if (action.type === LOG_OUT_REQUESTED) {
+    return Object.assign({}, state, {logOutRequestInFlight: true});
+  } else if (action.type === LOG_OUT_SUCCEEDED) {
+    return Object.assign({}, state, {logOutRequestInFlight: false, playerId: '', games: {}});
+
+  } else if (action.type === MESSAGE_RECEIVED) {
+    console.log('-------------------------MESSAGE------------------------------');
+    console.log(action);
+    if (action.payload.eventName === 'connection:accepted') {
+      return Object.assign({}, state, {playerId: action.payload.payload.playerId});
+    } else if (action.payload.eventName === 'connection:player-name-taken') {
+      return Object.assign({}, state, {error: action.payload.payload.reason});
+    } else if (action.payload.eventName === 'online-players') {
+      return Object.assign({}, state, {players: action.payload.payload});
+    }
   }
   return state;
 };

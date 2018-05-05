@@ -2,7 +2,10 @@
 import {
   LOG_IN_REQUESTED,
   LOG_IN_FAILED,
-  LOG_IN_SUCCEEDED
+  LOG_IN_SUCCEEDED,
+  LOG_OUT_REQUESTED,
+  LOG_OUT_SUCCEEDED,
+  MESSAGE_RECEIVED
 } from '../actions';
 
 let webSocketConnection = null;
@@ -13,27 +16,28 @@ export default (fetch = window.fetch) => (store) => (next) => {
     next(action);
 
     if (action.type === LOG_IN_REQUESTED) {
-      console.log('LOG_IN_REQUESTED++');
-      console.log(action);
-     return webSocketConnection = connectWebSocket({
+      webSocketConnection = connectWebSocket({
         onOpen: () =>
           store.dispatch({type: LOG_IN_SUCCEEDED}),
         onClose: ({reason}) =>{
-          console.log('onClose> ');
-          console.log(reason);
-          store.dispatch({type: LOG_IN_FAILED, payload: {reason}})
+          if(reason == ''){
+            store.dispatch({type: LOG_OUT_SUCCEEDED, payload: reason})            
+          }
+          else{
+            store.dispatch({type: LOG_IN_FAILED, payload: reason})
+          }
         },
-        onMessage: (inf) => {
-          console.log('onMessage> ');
-          console.log(inf);
+        onMessage: (message) => {
+          store.dispatch({type: MESSAGE_RECEIVED, payload: message})            
           
-          if (inf.eventName === 'player-name-taken') {
+          if (message.eventName === 'player-name-taken') {
             webSocketConnection.close();
-            setTimeout(() => initiateConnection(), 100);
           }
         },
         parameters: {playerName: action.payload}
       });
+    }else if(action.type === LOG_OUT_REQUESTED){
+      webSocketConnection.close();
     }
   };
 };

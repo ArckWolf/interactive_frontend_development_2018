@@ -3,6 +3,7 @@ import React from 'react';
 import Games from './GamesContainer';
 import GameButtons from './GameButtonsContainer';
 import LoginButtons from './LoginButtonsContainer';
+import PlayersContainer from './PlayersContainer';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <h1>Game Lobby</h1>
       </div>
       <LoginButtons />
+      <PlayersContainer />
       <GameButtons />
       <Games />
     </div>

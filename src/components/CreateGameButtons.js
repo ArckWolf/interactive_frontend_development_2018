@@ -6,7 +6,7 @@ const gameButtons = [
   {description: 'Create Hangman game', type: 'hangman'}
 ];
 
-const CreateGameButtons = ({createGame, createRequestInFlight}) => {
+const CreateGameButtons = ({createGame, createRequestInFlight, playerId}) => {
   const buttons = gameButtons.map(({description, type}, index) =>
     <button
       key={index}
@@ -20,7 +20,7 @@ const CreateGameButtons = ({createGame, createRequestInFlight}) => {
 
   return (
     <div className='create-game-buttons'>
-      {buttons}
+      {playerId !='' ? buttons : null}
       {createRequestInFlight ? <div>Creating...</div> : null}
     </div>
   );

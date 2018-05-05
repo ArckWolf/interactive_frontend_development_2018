@@ -10,6 +10,14 @@ export const LOG_IN_REQUESTED = 'LOG_IN_REQUESTED';
 export const LOG_IN_FAILED = 'LOG_IN_FAILED ';
 export const LOG_IN_SUCCEEDED = 'LOG_IN_SUCCEEDED';
 
+export const LOG_OUT_REQUESTED = 'LOG_OUT_REQUESTED';
+export const LOG_OUT_SUCCEEDED = 'LOG_OUT_SUCCEEDED';
+export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
+
+export const logOutRequested = () => ({
+  type: LOG_OUT_REQUESTED
+});
+
 export const logInRequested = (type) => ({
   type: LOG_IN_REQUESTED,
   payload: type
