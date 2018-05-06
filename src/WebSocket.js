@@ -1,4 +1,3 @@
-/* eslint-disable */
 const websocketConf = {
   port: 8081,
   host: 'localhost'
@@ -15,7 +14,6 @@ const objectToQueryString = (obj) => {
 };
 
 export const connect = ({onOpen, onClose, onMessage, parameters}) => {
-
   const websocketConnection = new WebSocket(
     `ws://${websocketConf.host}:${websocketConf.port}/?${objectToQueryString(parameters)}`
   );
@@ -28,7 +26,6 @@ export const connect = ({onOpen, onClose, onMessage, parameters}) => {
   };
 
   websocketConnection.onmessage = (messageEvent) => {
-    console.log(messageEvent);
     const payload = messageEvent.data;
 
     let parsedMessage;

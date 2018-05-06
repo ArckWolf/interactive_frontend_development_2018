@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   LOG_IN_REQUESTED,
   LOG_IN_FAILED,
@@ -20,23 +19,22 @@ export default (fetch = window.fetch) => (store) => (next) => {
         onOpen: () =>
           store.dispatch({type: LOG_IN_SUCCEEDED}),
         onClose: ({reason}) =>{
-          if(reason == ''){
-            store.dispatch({type: LOG_OUT_SUCCEEDED, payload: reason})            
-          }
-          else{
-            store.dispatch({type: LOG_IN_FAILED, payload: reason})
+          if (reason == '') {
+            store.dispatch({type: LOG_OUT_SUCCEEDED, payload: reason});
+          } else {
+            store.dispatch({type: LOG_IN_FAILED, payload: reason});
           }
         },
         onMessage: (message) => {
-          store.dispatch({type: MESSAGE_RECEIVED, payload: message})            
-          
+          store.dispatch({type: MESSAGE_RECEIVED, payload: message});
+
           if (message.eventName === 'player-name-taken') {
             webSocketConnection.close();
           }
         },
         parameters: {playerName: action.payload}
       });
-    }else if(action.type === LOG_OUT_REQUESTED){
+    } else if (action.type === LOG_OUT_REQUESTED) {
       webSocketConnection.close();
     }
   };
