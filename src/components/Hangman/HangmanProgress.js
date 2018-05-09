@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const FailureProgress = ({wrongGuessCount}) => {
   return (
     <span className='failure-progress'>
-      <img src={`images/Hangman-${wrongGuessCount}.png`} />
+      <img src={`../../images/Hangman-${wrongGuessCount}.png`} />
     </span>
   );
 };
