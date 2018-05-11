@@ -2,8 +2,11 @@ import {connect} from 'react-redux';
 import CreateGameButtons from '../components/CreateGameButtons';
 import {createGameRequested} from '../actions';
 
-const mapDispatchToProps = (dispatch) => ({
-  createGame: (type) => dispatch(createGameRequested(type))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  createGame: (type) => {
+    dispatch(createGameRequested(type));
+    ownProps.history.push('/ongoingGames');
+  }
 });
 
 const mapStateToProps = ({gameReducer, loginReducer}) => ({
